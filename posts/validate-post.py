@@ -65,7 +65,8 @@ def main(path):
     # "IMAGE: upload the file" comment instead of a real <img>. That comment is
     # stripped below along with every other comment, so detect the placeholder
     # BEFORE stripping, or it vanishes and the image check fails every run.
-    pending_upload = "IMAGE: upload the file" in body
+    pending_upload = ("IMAGE: upload the file" in body
+                      or "IMAGE: upload images/" in body)
 
     # Strip HTML comments before any structural check. Comments legitimately
     # mention tags (e.g. "do not add <h1>"), which would otherwise be counted
@@ -124,9 +125,29 @@ def main(path):
 
     # ---------- §12.7 longlasting ----------
     print("\n[§12 Longlasting]")
-    check(re.search(r"\b20\d{2}\b", body) is not None, "Article states an as-of date (§12.5)")
-    check(bool(re.search(r"(?i)re-?check|confirm the current price", body)),
-          "Tells reader to re-verify prices (§12.5)")
+    # §12.5 (price-dating) only binds price-led articles. An opinion piece, a
+    # tutorial or a conceptual comparison can carry zero prices and still be
+    # perfectly evergreen - there is nothing to date. Detect that from the body
+    # and skip only these three checks, not the whole section.
+    _no_meta = re.sub(r"META DESCRIPTION.*", "", body)
+    body_prices_early = re.findall(r"\$\s?\d[\d,]*(?:\s?-\s?\$?\d[\d,]*)?",
+                                  _no_meta)
+    # 3+ prices is not enough: an article can quote a few dollar figures purely
+    # as examples (e.g. an article ABOUT invented prices). Price-led means the
+    # reader is being asked to buy something, which shows up as commerce verbs
+    # near the figures.
+    commerce = bool(re.search(
+        r"(?i)\b(street price|buy|bought|price of|priced at|costs? \$|"
+        r"per month|/mo\b|subscription|retail|in stock|deal|worth \$)\b", _no_meta))
+    price_led = len(body_prices_early) >= 3 and commerce
+    if price_led:
+        check(re.search(r"\b20\d{2}\b", body) is not None,
+              "Article states an as-of date (§12.5)")
+        check(bool(re.search(r"(?i)re-?check|confirm the current price", body)),
+              "Tells reader to re-verify prices (§12.5)")
+    else:
+        warn("Not price-led (0-2 price figures)",
+             "price-dating checks skipped; only binds articles selling things")
     # Site currency is USD, so prices look like $340 or $300-380. The old
     # Rp-only pattern silently skipped price-led articles.
     # Strip the editor-notes metadata out of the price scan: "META DESCRIPTION
@@ -142,7 +163,7 @@ def main(path):
         warn("No prices in body", "acceptable if article is not price-led")
     # Only enforceable when the article actually quotes prices. An article
     # explaining a capability can legitimately quote none.
-    if prices:
+    if prices and price_led:
         dated = bool(re.search(
             r"(?i)about the prices|price when this article was written|"
             r"ranges observed|observed at .*retailers|starting point\s+"
@@ -151,9 +172,6 @@ def main(path):
             r"august|september|october|november|december)\s*\d{4}|"
             r"prices?\s+(?:of\s+)?(?:roughly|around|about)\s+\$", body))
         check(dated, "Explicit price-dating disclaimer (§12.5)")
-    else:
-        warn("No price figures in body",
-             "fine for a capability article; add a disclaimer if you quote prices")
 
     # ---------- §12.6 text-first ----------
     print("\n[§12.6 Text-first]")
