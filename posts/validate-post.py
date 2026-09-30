@@ -143,8 +143,10 @@ def main(path):
     if price_led:
         check(re.search(r"\b20\d{2}\b", body) is not None,
               "Article states an as-of date (§12.5)")
-        check(bool(re.search(r"(?i)re-?check|confirm the current price", body)),
-              "Tells reader to re-verify prices (§12.5)")
+        check(bool(re.search(
+            r"(?i)re-?check|confirm the current price|check the current price|"
+            r"check the price on the day|check the .*price before you buy", body)),
+            "Tells reader to re-verify prices (§12.5)")
     else:
         warn("Not price-led (0-2 price figures)",
              "price-dating checks skipped; only binds articles selling things")
