@@ -746,13 +746,14 @@
   /*]]>*/
   </script>
 
-  <script async='async' src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: &quot;ca-pub-4050278743595276&quot;,
-      enable_page_level_ads: true
-    });
-  </script>
+  <!-- AdSense: ONE loader for the whole page, explicit ?client= form.
+       crossorigin="anonymous" is REQUIRED by Google when ?client= is used.
+       Do not add a second adsbygoogle.js <script> anywhere else - the old
+       scroll-lazy injector and the per-ad copy are both gone, because two
+       loaders fight each other and the ad that renders is unpredictable.
+       enable_page_level_ads was removed on purpose: Auto Ads inject extra
+           units wherever it likes, which broke the two-slot rule. -->
+  <script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4050278743595276' crossorigin='anonymous'/>
 
   </head>
 
@@ -827,8 +828,9 @@
             <b:include data='post' name='post'/>
             <b:if cond='data:blog.pageType in {&quot;item&quot;,&quot;static_page&quot;}'>
               <div class='post-ad'>
-                <script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
-                <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='1381941266' data-full-width-responsive='true' style='display:block'/>
+                <!-- in-article slot: citzeye_main_Blog1_1x1_as.
+                     No <script> here on purpose - see the head loader. -->
+                <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='9319991741' data-full-width-responsive='true' style='display:block'/>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -1868,7 +1870,7 @@
        LATEST POSTS down by the ad's 250px min-height so the sidebar top
        edge sat ~250px below the main column's. Slot count is unchanged,
        only the position moved. -->
-  <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='1381941266' data-full-width-responsive='true' style='display:block'/>
+  <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='4283287486' data-full-width-responsive='true' style='display:block'/>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
@@ -1937,15 +1939,10 @@
   </div> <!-- END OUTER WRAPPER -->
 
 
-  <!-- IMPORTANT BEGIN -->
-  <!-- ON LAZY LOAD -->
-  <script type='text/javascript'>
-  //<![CDATA[
-  // Lazy Load AdSense
-  var lazyadsense=!1;window.addEventListener("scroll",function(){(0!=document.documentElement.scrollTop&&!1===lazyadsense||0!=document.body.scrollTop&&!1===lazyadsense)&&(!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(e,a)}(),lazyadsense=!0)},!0);
-  //]]>
-  </script>
-  <!-- OFF LAZY LOAD -->
+  <!-- Lazy-load injector removed. The head loader above is already async,
+       so it never blocked rendering; the scroll listener only added a second
+       loader competing with it. Ad slots still reserve their height in CSS,
+       so CLS is unaffected. -->
 
   <!-- ON ADBLOCK -->
   <!-- OFF ADBLOCK -->
