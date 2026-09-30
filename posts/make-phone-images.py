@@ -124,6 +124,25 @@ CONFIGS = {
              "#ff6b6b", "WHAT IT DISPLACES", "the same tray does both, on many phones"),
         ],
     },
+    # The two objects that decide the speed: the brick, and how much of it you
+    # have to carry. Left is the old silicon brick next to a GaN one of the same
+    # 30W, right is the 45W USB-C adapter the Pixel 10a's spec page tells you to
+    # buy separately. Both are real products, photographed.
+    "Phone Charging Speed": {
+        "out": "01-phone-charging-speed",
+        "layout": "compare",
+        "eyebrow": "~/PHONE CHARGING",
+        "title": "WATTAGE IS A CEILING",
+        "sub": "The phone is rarely the thing limiting your charge speed",
+        "accent": "#82aaff",
+        "footer": "Manufacturer spec pages checked September 2026",
+        "phones": [
+            ("The brick", None, ("silicon-vs-gan", "silicon", "gan"),
+             "#61ffca", "THE ACTUAL LIMIT", "same 30W, very different size"),
+            ("The adapter", None, ("45w-usbc-adapter", "45w", "adapter"),
+             "#ffca85", "WHAT YOU BUY", "any 100W USB-C PD brick will do"),
+        ],
+    },
     "Top 3 Midrange Gaming Phones": {
         "out": "01-midrange-gaming-phones",
         "eyebrow": "~/MIDRANGE GAMING",

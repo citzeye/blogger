@@ -1,0 +1,322 @@
+<!--
+TITLE:       Phone Charging Speed: Why the Number on the Box Is Wrong
+DESCRIPTION: An 80W phone can charge at 18W with the charger you already own. Wattage, region, and the brick in your drawer — explained. (139 chars)
+Delete this comment before pasting into Blogger, then fill Blogger's Title
+field with the TITLE line above and the Description field with DESCRIPTION.
+-->
+
+<!--
+SLUG:      /phone-charging-speed      (NO year)
+KEYWORDS:  phone, charging, wattage, charger, usb c, pd, adapter, oneplus,
+           pixel
+
+NO CHARGER PRICES. The advice is "any 100W USB-C PD brick", which needs no
+price and does not rot. See NOTES.md.
+
+NO "FASTEST CHARGING PHONE" LEADERBOARD. That is a spec table that goes stale on
+every launch, and the site already has roundups.
+
+THE THESIS: a phone's advertised wattage is a ceiling, not a prediction. Three
+things stand between you and that number, all documented by the manufacturers.
+
+EVERY FACT BELOW IS FROM A MANUFACTURER PAGE OR A NAMED OUTLET, quoted.
+
+  1. WATTAGE VARIES BY REGION ON THE SAME MODEL. OnePlus's own pages disagree:
+       oneplus.com/us/13r      "Amp up your power with the 55W SUPERVOOC
+                               charging."  /  "1-50% in 23 mins"
+       oneplus.com/global/13r  "Amp up your power with the 80W SUPERVOOC
+                               charging."  /  "1-50% in 20 mins"
+       oneplus.com/no/13r/specs and oneplus.com/in/13r/specs
+                               "Charge: 80W SUPERVOOC"
+     And the footnote on the US page that explains it:
+       "Up to 80W with OnePlus SUPERVOOC 80W Dual Ports GaN Power Adapter or
+        OnePlus SUPERVOOC 100W Dual Ports Power Adapter"
+
+  2. THE BRICK IS THE LIMIT, NOT THE PHONE. CNET, Jan 2025:
+       "The phone can charge at 55W speeds using the included SuperVooc power
+        adapter, although a OnePlus representative said it can support 80W and
+        100W speeds, however you'll have to buy those SuperVooc charger models
+        separately. OVER THE MORE WIDELY AVAILABLE USB-PD STANDARD, IT CAN
+        CHARGE AT 18W SPEEDS."
+     GSMArena's 13R review agrees: "The handset supports up to 80W of fast
+     charging over the proprietary SuperVOOC standard, so you'd have to buy a
+     charger separately."
+
+  3. THERE MAY BE NO BRICK, AND A PHONE CAN ASK FOR MORE THAN IT USES.
+       store.google.com Pixel 10a spec page:
+         "Fast charging - up to 50% in about 30 minutes - using 45W USB-C PPS
+          charger or higher, SOLD SEPARATELY"
+         "What's in the box: Pixel 10a / 1 m USB-C to USB-C cable (USB 2.0) /
+          SIM tool"
+       So a 30W phone (Wikipedia/PhoneArena: 30W wired, 10W Qi) ships with no
+       brick and asks for a 45W one. Ars Technica Feb 2026 confirms the step up
+       from the 9a: 23W wired / 7.5W wireless -> 30W wired / 10W wireless.
+
+  ONEPLUS BOX CONTENTS, oneplus.com/in/13r/specs:
+    "In The Box - OnePlus 13R SUPERVOOC Power Adapter / Type-A to C Cable /
+     Quick Start Guide / Protective Case / SIM Tray Ejector"
+  oneplus.com/us/charging: "Your charger is always included in the box."
+
+  WHY THE BRICK LEFT (Samsung UK support page, Galaxy S21 onward):
+    "Samsung discovered that many Galaxy users are reusing earphones and
+     chargers that they already have at home even after purchasing a new phone."
+    "Note: In-box items may vary depending on the model or the country or
+     region you live in."   <- region matters, not just model
+  Samsung dropped it at the S21 (2021), extended to A33/A53/A73 (2022).
+  Google said the Pixel 5a would be the last Pixel with a brick (Verge, 2021).
+  Apple first, in 2020.
+  Packaging effect, Uniqbe via BGR Mar 2026: "50%" less packaging per box,
+  "70% more" phones per pallet.
+
+  WIRELESS, for contrast:
+    Nothing Phone (1), GSMArena: "33W wired, PD3.0, QC4 ... 15W wireless ...
+      5W reverse wireless"
+    OnePlus 12 / 10 Pro / 9 Pro: 50W wireless; OnePlus 8 Pro: 30W
+      (ChargerLAB, from OnePlus official info)
+    Pixel 10a: 10W Qi. Ars Technica: "There are no Qi2 magnets inside."
+
+NOTHING HERE WAS MEASURED BY US. Every charge time is a manufacturer claim and
+the post says so. This site does not lab-test batteries.
+-->
+
+<!-- IMAGE: upload images/01-phone-charging-speed.jpg here. One image per post.
+     Upload to Blogger's own media library: Blogger only builds a post thumbnail
+     from an image on blogger.googleusercontent.com, so an image from another
+     host leaves the homepage card blank and og:image missing. Then fix alt
+     (Blogger's dialog writes alt=""), remove the <a href> wrapper Blogger adds,
+     strip style= and border=, and keep width/height. Use /s0/, not /s1600/.
+     Full steps in NOTES.md.
+
+     Two photos inside the graphic, both freely licensed:
+       silicon-vs-gan.jpg    4300streetcar, CC BY 4.0
+       45w-usbc-adapter.jpg   Dinkun Chen,      CC BY-SA 4.0
+     Attribution is repeated in the post footer because both licences require
+     it. Do not remove that footer line.
+-->
+
+<p>A phone that charges at 80 watts and a phone that charges at 18 watts are not
+the same phone, and the difference is usually not the phone. It is the block of
+plastic plugged into the wall.</p>
+
+<p>Three things stand between you and the charge speed on the spec sheet, and
+all three are documented by the manufacturer rather than by anyone testing it
+for you. The first is that <strong>the same model ships with different charging
+speeds in different countries</strong>.</p>
+
+<h2>The same phone, two different wattages, both on the manufacturer's site</h2>
+
+<p>OnePlus sells the 13R in the US and the UK. Its own pages do not agree on
+what it charges at.</p>
+
+<table>
+  <thead>
+    <tr><th>OnePlus page</th><th>Charging claim</th><th>Claimed 50%</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>oneplus.com/us/13r</td><td>"the <strong>55W</strong> SUPERVOOC charging"</td><td>23 mins</td></tr>
+    <tr><td>oneplus.com/global/13r</td><td>"the <strong>80W</strong> SUPERVOOC charging"</td><td>20 mins</td></tr>
+    <tr><td>oneplus.com/no/13r/specs</td><td>"Charge: <strong>80W</strong> SUPERVOOC™"</td><td>—</td></tr>
+    <tr><td>oneplus.com/in/13r/specs</td><td>"Charge: <strong>80W</strong> SUPERVOOC™"</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>Both numbers are real, and the footnote on the US page is what reconciles
+them:</p>
+
+<blockquote>
+  <p>"Up to 80W with OnePlus SUPERVOOC 80W Dual Ports GaN Power Adapter or
+  OnePlus SUPERVOOC 100W Dual Ports Power Adapter."</p>
+</blockquote>
+
+<p>So the US page is not contradicting the spec sheet — it is quoting the speed
+you get with the adapter in the box, and the spec sheet is quoting the speed
+you get with an adapter you have to buy. Both are accurate. Neither tells you
+which one is in your hand, which is why the answer depends on where you bought
+the phone.</p>
+
+<h2>The charger is the bottleneck, not the phone</h2>
+
+<p>This is the part that catches people out, because it is invisible until you
+plug in a charger that was not made for the phone.</p>
+
+<p>CNET put the numbers together in their OnePlus 13R comparison:</p>
+
+<blockquote>
+  <p>"The phone can charge at 55W speeds using the included SuperVooc power
+  adapter, although a OnePlus representative said it can support 80W and 100W
+  speeds, however <strong>you'll have to buy those SuperVooc charger models
+  separately</strong>. Over the more widely available USB-PD standard, it can
+  charge at <strong>18W speeds</strong>."</p>
+</blockquote>
+
+<p>GSMArena's review of the same phone reaches the same conclusion from the
+other direction:</p>
+
+<blockquote>
+  <p>"The handset supports up to 80W of fast charging over the proprietary
+  SuperVOOC standard, so you'd have to buy a charger separately."</p>
+</blockquote>
+
+<p>Read those two together and the shape of the problem is clear. A proprietary
+fast-charging standard needs a matching charger. Plug the same phone into a
+perfectly good third-party USB-C brick and you do not get 55W — you get
+<strong>18W</strong>, which is roughly where phones were in 2020 and is
+noticeably slower in the last ten minutes of a charge.</p>
+
+<p>That is not a fault in your charger. USB Power Delivery is a standard, and
+18W is a perfectly respectable USB-PD speed; the phone simply asks for more
+than the standard will give it without a private protocol.</p>
+
+<h2>And sometimes there is no charger at all</h2>
+
+<p>Since 2020 the brick has been disappearing from phone boxes, and the reasons
+given are worth reading because they are unusually direct.</p>
+
+<p>Samsung's UK support page, explaining the Galaxy S21 decision:</p>
+
+<blockquote>
+  <p>"Samsung discovered that many Galaxy users are reusing earphones and
+  chargers that they already have at home even after purchasing a new phone. Our
+  past models already have standardised chargers, and these chargers are widely
+  available at home."</p>
+</blockquote>
+
+<p>That was the S series in 2021, and it extended to the Galaxy A33, A53 and A73
+in 2022. Google said the Pixel 5a would be the last Pixel to include a brick.
+Apple started it. The Verge's summary at the time was blunt — "The bundled phone
+power brick is dead" — and noted that Apple, Samsung and Xiaomi together
+accounted for nearly half of global smartphone shipments, which is roughly why
+it stayed dead.</p>
+
+<p>The packaging arithmetic, which is the part manufacturers rarely quantify,
+was worked out by Uniqbe and reported by BGR in March 2026: roughly
+<strong>50% less packaging material per box</strong>, and thinner boxes mean
+<strong>70% more phones per shipping pallet</strong>.</p>
+
+<p>One warning from that same Samsung page, and it matters for anyone reading a
+review of a different regional model:</p>
+
+<blockquote>
+  <p>"In-box items may vary depending on the model or the country or region you
+  live in."</p>
+</blockquote>
+
+<p>Region, not just model. A phone reviewed by someone elsewhere may not have
+arrived with the same things in the box as yours.</p>
+
+<h3>Not every brand gave up</h3>
+
+<p>Some still ship one. OnePlus is explicit about it on its own charging page:
+<strong>"Your charger is always included in the box."</strong> Its 13R box
+contents, listed on the Indian spec page, are:</p>
+
+<ul>
+  <li>OnePlus 13R SUPERVOOC Power Adapter</li>
+  <li>Type-A to C Cable</li>
+  <li>Quick Start Guide</li>
+  <li>Protective Case</li>
+  <li>SIM Tray Ejector</li>
+</ul>
+
+<p>So before you spend anything, check what your specific model and region
+actually shipped with. Some of our current picks include one — the
+<a href="/2026/09/top-3-midrange-gaming-phones.html">OnePlus 13R</a> is the
+clearest example, while the <a href="/2026/09/3-budget-laptops-advertised-as-ai-none.html">Google
+Pixel 10a</a> in our other guides ships with a cable and a SIM tool and nothing
+else.</p>
+
+<h2>A phone can ask for more power than it uses</h2>
+
+<p>Google's Pixel 10a spec page contains an instruction that reads oddly until
+you understand it:</p>
+
+<blockquote>
+  <p>"Fast charging – up to 50% in about 30 minutes – using <strong>45W
+  USB-C® PPS charger or higher, sold separately</strong>."</p>
+</blockquote>
+
+<p>The Pixel 10a is a <strong>30W</strong> phone. It is telling you to use a
+<strong>45W</strong> charger. That is not a contradiction — it is how the system
+works. The charger supplies headroom and the phone draws what it needs, so a
+bigger brick charges at least as fast and never slower.</p>
+
+<p>The same page lists the box contents as: "Pixel 10a / 1 m USB-C® to USB-C®
+cable (USB 2.0) / SIM tool". No brick. So the instruction is the whole
+procurement process: buy a charger before you buy the phone, or discover the
+need on day one.</p>
+
+<p>Worth noting how much this has moved. Ars Technica's launch comparison shows
+the Pixel 10a at 30W wired and 10W wireless, against the Pixel 9a's 23W and
+7.5W — Google raised charging on a phone positioned as a budget model and still
+does not call it fast.</p>
+
+<h2>What to actually buy</h2>
+
+<p>The advice is shorter than you would expect, because it does not depend on the
+phone.</p>
+
+<ol>
+  <li><strong>Check the box first.</strong> If a brick came with it, you may not
+    need to buy anything.</li>
+  <li><strong>Otherwise buy a 100W USB-C Power Delivery brick from anyone.</strong>
+    Not the manufacturer's proprietary adapter — a standard 100W PD charger will
+    drive any phone at its maximum supported speed, and the premium for the
+    first-party version buys you a logo.</li>
+  <li><strong>Use a USB-C to USB-C cable, not USB-A.</strong> A USB-A port or
+    cable caps you well below what the phone can take. This is the single
+    cheapest mistake and it is invisible.</li>
+  <li><strong>Ignore wattage above 100W.</strong> Phones top out far below it.
+    Anything beyond that is packaging.</li>
+</ol>
+
+<p>One genuinely useful thing about modern high-wattage bricks: they no longer
+need to be large. Gallium-nitride replaced silicon in most of them, which is why
+a 30W charger is now roughly the size of the old 5W one. The photograph below is
+two chargers of identical 30W output, one of each type.</p>
+
+<h2>Wireless is a different trade</h2>
+
+<p>Worth being clear about, because wireless charging numbers are quoted as if
+they compete with wired ones.</p>
+
+<ul>
+  <li><strong>Nothing Phone (1)</strong>: 33W wired, 15W wireless, 5W reverse
+    wireless — so its wireless figure is less than half its own wired figure.
+  </li>
+  <li><strong>OnePlus 12, 10 Pro and 9 Pro</strong>: 50W wireless, which is the
+    fastest the brand has shipped. The OnePlus 8 Pro managed 30W.</li>
+  <li><strong>Pixel 10a</strong>: 10W Qi — and Ars Technica notes there are
+    "no Qi2 magnets inside", so alignment is whatever the coil in your case
+    happens to do.</li>
+</ul>
+
+<p>Wireless charging remains slower than the wired option on the same phone, and
+with high-wattage bricks now small enough to carry, the case for it is mostly
+that you do not have to plug anything in.</p>
+
+<h2>The short version</h2>
+
+<p>A phone's wattage is the fastest it <em>can</em> go, not what it will do in
+your house. The chain has three links: the phone's own limit, the charging
+protocol your charger speaks, and whether a charger exists in the box at all. It
+is entirely possible to own an 80W phone and charge it at 18W without doing
+anything wrong.</p>
+
+<p>Which is also why our <a href="/2026/09/top-3-midrange-gaming-phones.html">midrange
+gaming picks</a> lean on large batteries and storage speed rather than charging
+wattage — a phone that lasts all day and tops up over two hours is a worse
+experience than one that lasts half as long and recharges in twenty minutes,
+and the wattage number tells you less about that than it appears to.</p>
+
+<p style="font-size:.82rem;color:#6c6785;border-top:1px solid rgba(255,255,255,.07);padding-top:1rem;margin-top:2rem">
+<strong>Image credits.</strong> Silicon vs GaN 30W USB-C chargers by
+4300streetcar, CC BY 4.0. Samsung EP-T4510 45W power adapter with USB-C to C
+cable by Dinkun Chen, CC BY-SA 4.0. Both via Wikimedia Commons.
+<strong>Note on sourcing:</strong> this site does not lab-test batteries. Every
+charge time quoted above is a manufacturer's or a named publication's claim, not
+our measurement, and charging speed varies with temperature, battery age and
+what else is plugged into the phone. Specifications checked September 2026
+against oneplus.com, store.google.com, Samsung UK support, GSMArena, CNET, Ars
+Technica and ChargerLAB. Box contents vary by model and by region — check your
+own.
+</p>
