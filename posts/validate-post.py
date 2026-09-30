@@ -18,6 +18,40 @@ def warn(label, detail=""):
     print(f"  WARN  {label}" + (f"  — {detail}" if detail else ""))
     WARN.append(label)
 
+def meta_of(path, raw):
+    """Read TITLE / SLUG / KEYWORDS / META DESCRIPTION for an article.
+
+    Priority: the 2-line header at the top of index.html, then NOTES.md beside
+    the post, then the legacy inline notes. The notes moved out of index.html
+    when posts were collapsed to one file, so reading index.html alone now
+    finds nothing.
+    """
+    d = os.path.dirname(os.path.abspath(path))
+    notes = ""
+    np = os.path.join(d, "NOTES.md")
+    if os.path.isfile(np):
+        notes = open(np, encoding="utf-8").read()
+    head = raw[:raw.index("-->") + 3] if "-->" in raw[:2000] else raw[:2000]
+    # Yield every source. Do NOT short-circuit on the first hit: the 2-line
+    # header only carries TITLE and DESCRIPTION, so SLUG and KEYWORDS are only
+    # found further down, in NOTES.md.
+    for src in (head, notes, raw):
+        if src:
+            yield src
+
+
+def pick(sources, *names):
+    for src in sources:
+        for n in names:
+            m = re.search(rf"^{n}(?:\s*\([^)]*\))?\s*:\s*(.+)$", src, re.M)
+            if m:
+                v = " ".join(m.group(1).split())
+                v = re.sub(r"\s*\(\d+\s*chars?\)\s*$", "", v).strip()
+                if v and not v.startswith("UNSET"):
+                    return v
+    return ""
+
+
 def main(path):
     raw = open(path, encoding="utf-8").read()
     # Blogger renders the post title from the "Title" field as the page's only
@@ -27,6 +61,12 @@ def main(path):
     # Do NOT split on "-->" — the notes block itself contains nested <!-- --> comments.
     m = re.search(r"<!--\s*END (?:EDITOR )?NOTES\s*-->", raw, re.I)
     body = raw[m.end():] if m else raw
+    # A post awaiting a manual image upload carries an
+    # "IMAGE: upload the file" comment instead of a real <img>. That comment is
+    # stripped below along with every other comment, so detect the placeholder
+    # BEFORE stripping, or it vanishes and the image check fails every run.
+    pending_upload = "IMAGE: upload the file" in body
+
     # Strip HTML comments before any structural check. Comments legitimately
     # mention tags (e.g. "do not add <h1>"), which would otherwise be counted
     # as real markup.
@@ -40,8 +80,8 @@ def main(path):
     check(n_h1 == 0, "No H1 in body (title lives in Blogger's Title field)",
           f"found {n_h1}")
     # Title is supplied by Blogger; check it from the notes header, not the body.
-    th = re.search(r"^TITLE(?:\s*\(Blogger field\))?\s*:\s*(.+)$", raw, re.M)
-    title = th.group(1).strip() if th else ""
+    srcs = list(meta_of(path, raw))
+    title = pick(srcs, "TITLE")
     check(0 < len(title) <= 65, "Title length <= 65 chars", f"{len(title)}: {title!r}")
     check(not re.search(r"\b20\d{2}\b", title), "No year in title (§12.2)", title)
 
@@ -53,23 +93,24 @@ def main(path):
     skipped = any(order[i] == "3" and (i == 0 or "2" not in order[:i]) for i in range(len(order)))
     check(not skipped, "Heading hierarchy never skips a level (§12.8)")
 
-    md = re.search(r"META DESCRIPTION\s*:\s*(.+)", raw)
+    md_val = pick(srcs, "META DESCRIPTION", "DESCRIPTION")
+    md = re.match(r"(.+)", md_val) if md_val else None
     if md:
-        d = re.sub(r"\s*\(\d+ chars\)", "", md.group(1)).strip()
+        d = md.group(1).strip()
         check(len(d) <= 160, "Meta description <= 160 chars", f"{len(d)}: {d!r}")
         check(len(d) >= 70, "Meta description >= 70 chars", f"{len(d)}")
     else:
         check(False, "Meta description declared in editor notes")
 
-    slug = re.search(r"SLUG\s*:\s*(\S+)", raw)
+    slug_m = pick(srcs, "SLUG")
+    slug = re.match(r"(\S+)", slug_m) if slug_m else None
     check(bool(slug), "Slug declared")
     if slug:
         check(not re.search(r"20\d{2}", slug.group(1)), "No year in slug (§12.2)", slug.group(1))
 
     # Primary keyword is declared per article in the editor notes, so this
     # validator is not welded to one post. Format:  KEYWORDS: laptop, school
-    kwd = re.search(r"^KEYWORDS\s*:\s*(.+)$", raw, re.M)
-    kws = [k.strip().lower() for k in kwd.group(1).split(",") if k.strip()] if kwd else []
+    kws = [k.strip().lower() for k in pick(srcs, "KEYWORDS").split(",") if k.strip()]
     if not kws:
         warn("No KEYWORDS declared in editor notes",
              'add "KEYWORDS: term, term" so the keyword checks are meaningful')
@@ -124,8 +165,9 @@ def main(path):
 
     # ---------- §2 images / media ----------
     print("\n[§2 Images]")
-    check(len(imgs) > 0, "Article has at least one image",
-          "text-only is allowed by §12.6 but hurts CTR")
+    check(len(imgs) > 0 or pending_upload, "Article has an image",
+          "PENDING manual Blogger upload" if pending_upload
+          else "text-only is allowed by §12.6 but hurts CTR")
     for i in imgs:
         src = re.search(r'src="([^"]+)"', i)
         if src and src.group(1).startswith("http") and "citzeye" not in src.group(1):

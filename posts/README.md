@@ -5,13 +5,36 @@ Tool `.py` di sini dipakai lintas post, jadi tetap di root.
 
 ```
 posts/
-└── <Judul Post>/
-    ├── index.html          ← isi artikel (body saja, tanpa <h1>)
-    └── images/
-        ├── *.webp          ← komposit (yang dilupload ke Blogger)
-        └── refs/           ← foto produk asli
-            └── laptop/     ← (opsional) foto produk untuk artikel ini
+├── <Judul Post>/           ← nama folder = judul post PERSIS
+│   ├── index.html          ← SATU-SATUNYA file yang di-paste ke Blogger
+│   ├── NOTES.md            ← catatan internal (tidak dipublish)
+│   └── images/             ← 1 file gambar untuk post ini
+├── _legacy/                ← file jaman awal, jangan dipakai lagi
+└── *.py                    ← tool (validator + generator gambar)
 ```
+
+## Struktur index.html
+
+Dua baris info di paling atas, dalam komentar yang **dihapus sebelum paste**:
+
+```
+<!--
+TITLE:       3 AI Apps That Make Your Work Easier
+DESCRIPTION: Satu kalimat, 70-160 karakter, untuk kolom Description.
+-->
+```
+
+Lalu langsung isi artikel. Tidak ada `<h1>` di body. Tidak ada catatan
+panjang — semua itu pindah ke `NOTES.md`.
+
+## Kenapa gambar harus di-upload ke Blogger, bukan GitHub
+
+Blogger **hanya** membuat thumbnail post dari gambar yang di-host di
+`blogger.googleusercontent.com`. Kalau `src` menunjuk ke GitHub atau host lain,
+`data:post.thumbnailUrl` **kosong** — card homepage tampil tanpa gambar, dan
+`og:image` / `twitter:image` ikut hilang.
+
+Jadi upload manual ke media Blogger. Catatan lengkap ada di `NOTES.md` tiap post.
 
 ## Bikin post baru
 
