@@ -27,18 +27,50 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_POST = "3 Cheap Laptops for School That Hold Up"
+
+# The verdict line is the only per-post difference between the two articles that
+# share these three laptops. Everything else - geometry, sizes, colours - is
+# identical on purpose, so the graphics read as one set.
+THIRD_LINE = {
+    "3 Cheap Laptops for School That Hold Up": {
+        "acer":   "Chrome OS, 14in 1920x1200 matte",
+        "lenovo": "Windows 11, 15.6in 1080p",
+        "hp":     "Windows 11, 512GB SSD",
+    },
+    "Can Budget Laptops Run AI Locally": {
+        "acer":   "No NPU - cloud AI only",
+        "lenovo": "No NPU - small models, slowly",
+        "hp":     "No NPU - cloud AI only",
+    },
+}
+HEADINGS = {
+    "3 Cheap Laptops for School That Hold Up":
+        ("~/SCHOOL LAPTOPS", ["3 CHEAP LAPTOPS", "FOR SCHOOL"],
+         "US street prices, checked September 2026"),
+    "Can Budget Laptops Run AI Locally":
+        ("~/ON-DEVICE AI", ["THE AI LABEL", "ON A BUDGET LAPTOP"],
+         "Checked against Microsoft Copilot+ requirements"),
+}
+ACCENT_LINE = {
+    "3 Cheap Laptops for School That Hold Up": "Street prices are ranges. Re-check before you buy.",
+    "Can Budget Laptops Run AI Locally":
+        "None of these three has a neural processing unit.",
+}
 EXT = (".jpg", ".jpeg", ".png", ".webp", ".avif")
-OUT_STEM = "01-laptops-for-school"
+OUT_STEM = {
+    "3 Cheap Laptops for School That Hold Up": "01-laptops-for-school",
+    "Can Budget Laptops Run AI Locally": "01-budget-laptop-ai-verdict",
+}
 NORMALISED = (1200, 900)          # 4:3 working copy, so every stage fills evenly
 
 # label, price, keywords, colour key, tag, blurb
 LAPTOPS = [
     ("Acer Chromebook Plus 514", 340, ("acer", "chromebook"), "accent",
-     "BEST OVERALL", "Chrome OS, 14in 1920x1200 matte"),
+     "BEST OVERALL", "acer"),
     ("Lenovo IdeaPad Slim 3i", 325, ("lenovo", "ideapad", "slim 3i"), "sky",
-     "CHEAPEST WINDOWS", "Windows 11, 15.6in 1080p"),
+     "CHEAPEST WINDOWS", "lenovo"),
     ("HP OmniBook 3", 475, ("hp", "omnibook", "omni book"), "success",
-     "MOST STORAGE", "Windows 11, 512GB SSD"),
+     "MOST STORAGE", "hp"),
 ]
 
 CARD_H, GAP = 460, 20
@@ -83,18 +115,18 @@ def normalise(src, work):
          "-quality", "93", work], check=True)
 
 
-def build(mri, work_names, colours):
+def build(mri, work_names, colours, post):
     W, M = mri.W, mri.M
     cw = W - 2 * M
-    head = ("~/SCHOOL LAPTOPS", ["3 CHEAP LAPTOPS", "FOR SCHOOL"],
-            "US street prices, checked September 2026")
+    blurb = THIRD_LINE[post]
+    head = HEADINGS[post]
     head_h = mri.Canvas(10).header(*head)
     h = head_h + 3 * CARD_H + 2 * GAP + 120
 
     c = mri.Canvas(h)
     y = c.header(*head)
 
-    for i, (label, price, _keys, ck, tag, blurb) in enumerate(LAPTOPS):
+    for i, (label, price, _keys, ck, tag, key) in enumerate(LAPTOPS):
         col = colours[ck]
         c.rect(M, y, cw, CARD_H, mri.CARD, stroke=col, sw=3)
         # ---- NAME AT THE TOP of the card ----
@@ -108,15 +140,14 @@ def build(mri, work_names, colours):
         # ---- price + reason, right ----
         tx = M + 24 + PHOTO_W + 34
         c.text(tx, y + 250, f"${price}", 46, col, weight=True)
-        c.text(tx, y + 300, blurb, 27, mri.MUTED)
+        c.text(tx, y + 300, blurb[key], 27, mri.MUTED)
         bar_w = cw - (tx - M) - 24
         c.rect(tx, y + 340, bar_w, 12, mri.BORDER, rx=6)
         top = max(p for _l, p, *_ in LAPTOPS)
         c.rect(tx, y + 340, round(bar_w * price / top), 12, col, rx=6)
         y += CARD_H + GAP
 
-    c.text(M, y + 48, "Street prices are ranges. Re-check before you buy.",
-           mri.FS_SMALL, mri.DIM)
+    c.text(M, y + 48, ACCENT_LINE[post], mri.FS_SMALL, mri.DIM)
     return c
 
 
@@ -162,7 +193,7 @@ def main():
                  "each must contain its own keyword.")
 
     colours = {"accent": mri.ACCENT, "sky": mri.SKY, "success": mri.SUCCESS}
-    mri.render(OUT_STEM, build(mri, work_names, colours))
+    mri.render(OUT_STEM[post], build(mri, work_names, colours, post))
     for w in works:
         os.remove(w)
 
