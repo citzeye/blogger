@@ -1,0 +1,20 @@
+
+/* ==== static sitemap page ==== */
+.sitemap-list{list-style:none;margin:0 0 2rem;padding:0}
+.sitemap-list li{display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:baseline;
+  padding:.7rem 0;border-bottom:1px solid var(--border,rgba(127,127,127,.22))}
+.sitemap-list a{font-weight:600;text-decoration:none}
+.sitemap-list a:hover{text-decoration:underline}
+.sitemap-date{margin-left:auto;flex:0 0 auto;font-size:.8125rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--muted,rgba(127,127,127,.85));white-space:nowrap}
+.sitemap-new{font-size:.6875rem;font-family:ui-monospace,monospace;
+  letter-spacing:.04em;text-transform:uppercase;padding:.1rem .4rem;
+  border-radius:3px;background:rgba(97,255,202,.14);color:#61ffca}
+/* no white-space:nowrap on the link - long titles must wrap, or they cause
+   horizontal overflow on a phone */
+@media (max-width:480px){
+  .sitemap-list li{flex-direction:column;gap:.15rem}
+  .sitemap-date{margin-left:0}
+}
+/* ==== end sitemap ==== */
