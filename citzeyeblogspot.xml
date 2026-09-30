@@ -1540,14 +1540,7 @@
   </div>
 
   <aside id='sidebar-wrapper'>
-	<script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
-                <!-- Footer ads lateway -->
-                <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='1381941266' data-full-width-responsive='true' style='display:block'/>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-
-  <b:section class='sidebar' id='sidebar' showaddelement='yes'>
+<b:section class='sidebar' id='sidebar' showaddelement='yes'>
     <b:widget id='HTML2' locked='false' title='LATEST POSTS' type='HTML' version='1'>
       <b:widget-settings>
         <b:widget-setting name='content'><![CDATA[<div class='widget-list'>
@@ -1869,6 +1862,16 @@
   </b:includable>
     </b:widget>
   </b:section>
+
+  <!-- Sidebar ad. MUST stay AFTER the widget section, not before it.
+       It used to sit as the first child of #sidebar-wrapper, pushing
+       LATEST POSTS down by the ad's 250px min-height so the sidebar top
+       edge sat ~250px below the main column's. Slot count is unchanged,
+       only the position moved. -->
+  <ins class='adsbygoogle' data-ad-client='ca-pub-4050278743595276' data-ad-format='auto' data-ad-slot='1381941266' data-full-width-responsive='true' style='display:block'/>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
   </aside>
 
   </div>
