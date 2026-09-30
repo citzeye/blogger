@@ -1,0 +1,82 @@
+# posts/ — workflow
+
+Satu folder per post. **Nama folder = judul post persis.**
+Tool `.py` di sini dipakai lintas post, jadi tetap di root.
+
+```
+posts/
+└── <Judul Post>/
+    ├── index.html          ← isi artikel (body saja, tanpa <h1>)
+    └── images/
+        ├── *.webp          ← komposit (yang dilupload ke Blogger)
+        └── refs/           ← foto produk asli
+            └── laptop/     ← (opsional) foto produk untuk artikel ini
+```
+
+## Bikin post baru
+
+1. **Buat folder** dengan nama = title persis:
+   ```bash
+   mkdir -p "posts/<Judul Post>/images/refs"
+   ```
+2. **`index.html`** — simpan body artikel di sana. Yang wajib:
+   - **Tanpa `<h1>`.** Judul Goes ke kolom *Title* Blogger; Blogger yang
+     merender satu-satunya H1 dari situ.
+   - Tanpa tahun di title maupun slug.
+   - Tanpa wrapper `<div>`, tanpa `<a>` melingkupi `<img>`, tanpa `style=`,
+     tanpa `border=` — itu yang ditulis ulang Blogger kalau sisip lewat dialog.
+   - Harga **range** + "checked on <Bulan> <Tahun>".
+   - Maksimal **3 picks** per artikel list.
+   - Ejaan **US** (`color`, `behavior`, `center`) — bukan UK.
+   - Mata uang **USD**, dan produknya harus benar-benar dijual di US **dan** UK.
+3. **Simpan blok editor notes** di awal `index.html`, ditutup dengan
+   ```html
+   -->
+   <!-- END EDITOR NOTES -->
+   ```
+   Isi notes: `TITLE`, `SLUG`, `KEYWORDS`, `META DESCRIPTION`, `LABEL`,
+   `PRICE CHECKED ON`, `SOURCES`, `POST FOLDER`, `IMAGES`.
+   Isi notes tidak pernah tayang.
+4. **Foto produk** → `images/refs/`
+5. **Buat komposit:**
+   ```bash
+   python3 posts/make-laptop-images.py "<Judul Post>"   # schema laptop
+   python3 posts/make-real-images.py  "<Judul Post>"   # schema device/HP
+   ```
+   Script menolak jalan (dan tidak menghasilkan file apa pun) kalau foto
+   produk belum ada. Tidak pernah membuat placeholder.
+6. **Validasi:**
+   ```bash
+   python3 posts/validate-post.py "posts/<Judul Post>/index.html"
+   ```
+   Target: `ALL RULES PASS`.
+
+## Upload ke Blogger
+
+1. Blogger → **Edit post** → tab **HTML view** (bukan Compose)
+2. Ctrl+A, paste isi `index.html`, Publish
+3. Kolom **Title** diisi persis dengan `TITLE` dari editor notes
+4. Upload komposit **urutan**: gambar pertama lebih dulu, karena yang pertama
+   menentukan `data:post.thumbnailUrl`
+
+> Nonaktifkan blocker (Brave Shields) untuk `blogger.com` dulu. Tanpa itu
+> upload gambar gagal **tanpa报错**.
+
+## Tool
+
+| File | Guna |
+|---|---|
+| `validate-post.py` | Cek SEO, evergreen, heading, gambar, link internal |
+| `make-real-images.py` | Komposit device/HP (1080px potret) |
+| `make-laptop-images.py` | Komposit laptop (1080px potret) |
+| `make-images.py` | Generator lama era grafik abstrak — **deprecated** |
+| `build-fixed-post.py` | Bikin body pengganti untuk post yang sudah live |
+| `post-body-FIXED.html` | Body pengganti artikel HP (sudah dipakai) |
+| `images-paste.html` | Instruksi sisip gambar era lama |
+| `phones-data.json` | Data pasar HP IDR era lama |
+
+## Aturan isi yang tidak bisa dinegosiasi
+
+Lihat `.opencode/skills/blogger-posts/SKILL.md` dan `AGENT.md`. Yang paling
+sering dilanggar: **judul bukan `<h1>`**, **maksimal 3 picks**, **USD bukan
+IDR**, dan **ejaan US**.

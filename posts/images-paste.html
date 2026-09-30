@@ -1,0 +1,56 @@
+<!-- ==========================================================================
+     4 IMAGE BLOCKS — corrected, ready to paste into Blogger's HTML view
+     Blogger (paste) file: post-3-photo-budget.html
+     ==========================================================================
+
+     HASIL UPLOAD LU ADA MASALAH. Ringkasannya:
+
+     1. Posisi salah      01-featured ada di slot yang mestinya 03
+     2. Alt salah         gambar 01 bawa teks alt milik 03
+     3. Alt kosong        02 dan 03 punya alt=""
+     4. 04 belum ada      04-which-one.webp belum pernah diupload
+
+     CARA PAKAI
+     1. Upload dulu images/04-which-one.webp (satu-satunya yang belum ada).
+     2. Blogger -> edit post -> klik "HTML view" (tab di kanan atas).
+     3. Hapus keempat blok <div class="separator"> yang sudah ada di post.
+     4. Tempel ke-4 blok di bawah ini di posisi yang ditandai.
+     5. Balik ke Compose untuk cek, lalu Publish.
+
+     Kenapa pakai HTML view, bukan dialog Insert image:
+     Dialog Bloggersometimes menulis alt="" dan membungkus gambar dengan
+     <a href="gambar-itu-sendiri">, jadi alt jadi hilang.
+
+     Kenapa blok ini tidak pakai <a href>:
+     Supaya tidak jadi link ke dirinya sendiri (itu default lightbox Blogger).
+     Kalau tetap mau lightbox: Settings -> Posts -> matikan "Image lightbox".
+     ==========================================================================
+
+
+<!-- ===================== (1) FEATURED IMAGE =====================
+     Taruh: SEGERA setelah <h1>, sebelum paragraf pertama.
+     PENTING: ini harus jadi GAMBAR PERTAMA di artikel, karena template
+     mengambil thumbnail card + og:image dari data:post.thumbnailUrl,
+     dan Blogger mengisi itu dengan gambar pertama.
+     ---------------------------------------------------------------- -->
+<img alt="Cover graphic: five budget smartphones under IDR 2 million with their street prices, from Rp 1,499,000 to Rp 1,899,000" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUKoRPf-EvJDaYcykpL2eIZudMctY1GoIm6QF97ffONV51jLTthuVlOCMk7mM1sQUWtJjmwndyuRq_PYbWuIYKxK-WN7Dq_9x51ntmmVzYLn1y7-12zq1jmNy0eoMFfun3JuBbGyPxzp5ee1kGcTgH9AJP9dwQxx46V5AoIcQPwbTb28iWd9Z1aDPRFxhr/s1600/01-featured.webp" width="1600" height="1067" loading="lazy">
+
+
+<!-- ===================== (2) WHAT MATTERS =====================
+     Taruh: sebelum <h2>What IDR 2 Million Actually Buys You</h2>
+     Ganti nama file: 02 -> 03  (menyesuaikan dengan file lu)
+     ---------------------------------------------------------------- -->
+<img alt="The four criteria that matter most when buying a phone on a tight budget: RAM, battery, refresh rate and software update support" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3W4ZhfQT27MDMHdyPzVHcKzpIp0ACwyo8s4fLEUvqTFZbanjdmkCvbe61GpA5dhk6uvm1A9bd__Jo6Wg2ESyzWRsOORP6L_jUFMNOa15p-c_jF2MEbeX7wYpmPy2s1Ju0iFNbXQqPO1qcKrwLYjspIS0A4fQPTI30iarBSkiWuKpNon9E_11CRrKHc04q/s1600/03-what-matters.webp" width="1400" height="933" loading="lazy">
+
+
+<!-- ===================== (3) PRICE CHART =====================
+     Taruh: sebelum <table> (masih di section "Quick Comparison")
+     ---------------------------------------------------------------- -->
+<img alt="Bar chart comparing street prices of the five recommended phones, from Rp 1,499,000 to Rp 1,899,000, checked September 2026" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFeYQhxbPE5kGPSWMgXGz7fgY4jRflSD3xstJGNec1If3yLBdHDc94ianaXuVFHeVxPhBoA5HKOi1v7sRzmw5Sj5tTPZ6ToFEYkeiQdBdS8CPHnGtijP_LSCVAc-K_UwVp31dKdAhiK6rG9asONsWy2A7S2Aks_vkhdA1A7xyL93tsuzkOFgymm3sigvUu/s1600/02-price-comparison.webp" width="1400" height="933" loading="lazy">
+
+
+<!-- ===================== (4) WHICH ONE =====================
+     Taruh: setelah <h2>Which One Should You Pick?</h2>
+     Ganti src-nya dengan URL dari upload 04-which-one.webp (GANTI DULU).
+     ---------------------------------------------------------------- -->
+<img alt="Decision list mapping each need to a phone: best all-rounder, best battery, longest support, most durable, and cheapest 120Hz" src="GANTI-DENGAN-URL-04-WHICH-ONE" width="1400" height="933" loading="lazy">

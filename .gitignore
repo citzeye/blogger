@@ -1,0 +1,15 @@
+# build intermediates - never upload these
+*.svg
+_build-artifact/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# quarantined / superseded assets
+_JANGAN-DIPAKAI/
+_SALAH-PRODUK/
+.orig/
+
+# OS noise
+.DS_Store
+Thumbs.db

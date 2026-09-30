@@ -1,0 +1,178 @@
+{
+  "_meta": {
+    "article": "5 Phones Worth Buying Under IDR 2 Million",
+    "file": "phones-data.json",
+    "price_checked": "2026-09",
+    "currency": "IDR",
+    "usage": "Reference data for article + input for AI image generation. Specs and prices are transcribed from the sources listed in _sources and MUST be re-verified before publishing.",
+    "image_note": "image_url entries are official manufacturer CDN links found in page metadata. They are copyrighted by the manufacturers and are recorded here as SOURCE REFERENCES only, not as files to republish. Use them as visual reference when generating original artwork."
+  },
+
+  "palette": {
+    "_note": "Aura Dark — matches citzeyeblogspot.xml",
+    "bg": "#15141b",
+    "bg_card": "#1c1b23",
+    "bg_elev": "#211f2b",
+    "fg": "#edecee",
+    "muted": "#9a95ab",
+    "dim": "#6c6785",
+    "purple": "#a277ff",
+    "pink": "#f694ff",
+    "sky": "#82aaff",
+    "mint": "#61ffca",
+    "peach": "#ffca85"
+  },
+
+  "phones": [
+    {
+      "rank": 1,
+      "name": "Redmi Note 14",
+      "brand": "Xiaomi",
+      "tag": "BEST OVERALL",
+      "accent": "#a277ff",
+      "price_idr": 1895000,
+      "price_usd_approx": 112,
+      "official_page": "https://www.mi.co.id/id/product/redmi-note-14",
+      "official_page_status": "HTTP 200",
+      "image_url": "https://i02.appmifile.com/121_item_id/04/06/2025/cf0d39869c3e13c5d081d57167e44161.png",
+      "image_source": "og:image from official mi.co.id page",
+      "additional_images": [
+        "https://i02.appmifile.com/448_operator_sg/09/06/2025/6010d34198579cbd858ba86b1d326d98.png",
+        "https://i02.appmifile.com/65_operator_sg/08/01/2025/a1c70b0a0a073e2a4687b4216dcfec6c.png",
+        "https://i02.appmifile.com/902_operator_sg/08/01/2025/d5b8cc48a2880abaf6a92fa4578b424d.jpg"
+      ],
+      "specs": {
+        "display": "6.67 inch AMOLED, 120Hz, up to 2100 nits peak",
+        "chipset": "MediaTek Helio G99-Ultra (6nm)",
+        "camera_main": "108 MP",
+        "battery": "5500 mAh",
+        "charging": "33W",
+        "protection": "IP54, Corning Gorilla Glass 5",
+        "os": "HyperOS on Android, 2 OS updates + 4 years security"
+      },
+      "alt_text": "Xiaomi Redmi Note 14 front view showing its 6.67-inch AMOLED display",
+      "why": "Only phone in this band pairing a 120Hz AMOLED with a 5500mAh battery."
+    },
+    {
+      "rank": 2,
+      "name": "Galaxy A07",
+      "brand": "Samsung",
+      "tag": "LONGEST SUPPORT",
+      "accent": "#82aaff",
+      "price_idr": 1899000,
+      "price_usd_approx": 112,
+      "official_page": "https://www.samsung.com/id/smartphones/galaxy-a/",
+      "official_page_status": "HTTP 200",
+      "image_url": null,
+      "image_source": "not exposed in og:image; find on the official product page manually",
+      "specs": {
+        "display": "LCD, high refresh rate",
+        "chipset": "entry-level Exynos / Dimensity tier",
+        "camera_main": "50 MP",
+        "battery": "5000 mAh class",
+        "charging": "standard",
+        "os": "One UI with Samsung's published A-series update commitment"
+      },
+      "alt_text": "Samsung Galaxy A07 slim front view on a light background",
+      "why": "Most likely to still receive security updates three years on.",
+      "_verify": "Confirm exact panel type, chipset and update window for the Indonesian market. The global A07 and the Indonesian variant differ."
+    },
+    {
+      "rank": 3,
+      "name": "Redmi 15",
+      "brand": "Xiaomi",
+      "tag": "BEST BATTERY",
+      "accent": "#61ffca",
+      "price_idr": 1749000,
+      "price_usd_approx": 103,
+      "official_page": "https://www.mi.co.id/id/product/redmi-15",
+      "official_page_status": "HTTP 200",
+      "image_url": "https://i02.appmifile.com/358_item_id/15/09/2025/73f3eafdb6e3088d817ad800d4f6f311.png",
+      "image_source": "og:image from official mi.co.id page",
+      "additional_images": [
+        "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-15/pc/074a8dae1e2fd73ec153a76a5e4e9e90.jpg"
+      ],
+      "specs": {
+        "battery": "7000 mAh",
+        "display": "large display, high refresh rate",
+        "charging": "slower than the Redmi Note 14"
+      },
+      "alt_text": "Xiaomi Redmi 15 front view with its large high-refresh display",
+      "why": "A 7000mAh cell is unusual at this price and removes battery anxiety.",
+      "_verify": "Confirm the exact screen size, refresh rate and charging wattage."
+    },
+    {
+      "rank": 4,
+      "name": "Tecno Spark Go 3",
+      "brand": "Tecno",
+      "tag": "MOST DURABLE",
+      "accent": "#ffca85",
+      "price_idr": 1599000,
+      "price_usd_approx": 95,
+      "official_page": "https://www.tecno-mobile.com/phones/product-detail/product/spark-go-3/",
+      "official_page_status": "HTTP 200",
+      "image_url": null,
+      "image_source": "og:image returns a logo, not the phone. Find on the official product page manually.",
+      "specs": {
+        "display": "120Hz",
+        "protection": "IP64, drop tested to about 1.2 m",
+        "memory": "extended RAM support",
+        "camera": "weakest of the five"
+      },
+      "alt_text": "Tecno Spark Go 3 front view highlighting its thick, durable frame",
+      "why": "IP64 plus tested drop resistance is genuinely unusual at this price."
+    },
+    {
+      "rank": 5,
+      "name": "Infinix Hot 60i",
+      "brand": "Infinix",
+      "tag": "CHEAPEST 120Hz",
+      "accent": "#f694ff",
+      "price_idr": 1499000,
+      "price_usd_approx": 89,
+      "official_page": "https://www.infinixmobility.com/hot-60i/",
+      "official_page_status": "HTTP 200",
+      "image_url": null,
+      "image_source": "not exposed in og:image; find on the official product page manually.",
+      "specs": {
+        "display": "6.7 inch IPS LCD, 120Hz, 700 nits HBM",
+        "resolution": "720 x 1600 (720p+)",
+        "chipset": "MediaTek Helio G81 Ultimate (12nm)",
+        "battery": "5160 mAh",
+        "charging": "45W wired, 50% in about 24 minutes",
+        "protection": "IP64, drop resistant up to 1.5 m",
+        "build": "7.7 mm, 188 g",
+        "camera_main": "50 MP",
+        "os": "XOS 15 on Android 15"
+      },
+      "alt_text": "Infinix Hot 60i front view showing its 6.7-inch 120Hz display",
+      "why": "Gets a 120Hz panel cheaper than anything else on the list.",
+      "_verify": "IMPORTANT: there are two Infinix Hot 60i variants. The 4G version (Helio G81, 5160mAh, 45W, 6.7in) is the one sold in Indonesia at this price. The 5G version (Dimensity 6400, 6000mAh, 18W, 6.75in) is a different phone. Confirm which one the local price refers to."
+    }
+  ],
+
+  "generated_graphics": {
+    "_note": "Original artwork generated by make-images.py. No copyrighted product photos used. All 3:2 to match the card layout.",
+    "01-featured": "1600x1067px — article cover, title + all 5 phones with prices",
+    "02-price-comparison": "1400x933px — bar chart of street prices",
+    "03-what-matters": "1400x933px — the four selection criteria",
+    "04-which-one": "1400x933px — question-to-phone decision list"
+  },
+
+  "_sources": [
+    "https://www.mi.co.id/id/product/redmi-note-14",
+    "https://www.mi.co.id/id/product/redmi-15",
+    "https://www.samsung.com/id/smartphones/galaxy-a/",
+    "https://www.infinixmobility.com/hot-60i/",
+    "https://www.tecno-mobile.com/phones/product-detail/product/spark-go-3/",
+    "https://www.gsmarena.com/infinix_hot_60i_4g-ampp-13983.php"
+  ],
+
+  "press_reports_used_for_market_research": [
+    "https://erafone.com/artikel/post/hp-dibawah-2-jutaan-03",
+    "https://erafone.com/artikel/post/hp-2-jutaan-terbaik-2026-03",
+    "https://www.erablue.id/blog/daftar-hp-dibawah-2-juta-1574122",
+    "https://carisinyal.com/hp-dibawah-2-juta-terbaik",
+    "https://www.91mobiles.com/id/rekomendasi-hp-harga-2-jutaan-terbaik"
+  ]
+}
