@@ -105,6 +105,25 @@ CONFIGS = {
              "#a277ff", "WHAT YOU BUY", "DDR5 SODIMM - the short, notched stick"),
         ],
     },
+    # The two objects this article is actually about, at real relative scale:
+    # the card, and the SIM tray it competes with for the same slot. The point
+    # of the layout is that the nano-SIM is not a second card - it is the other
+    # half of one shared slot.
+    "Phones With SD Card Slot": {
+        "out": "01-phones-with-sd-card-slot",
+        "layout": "compare",
+        "eyebrow": "~/PHONE STORAGE",
+        "title": "THE SD SLOT TRADE",
+        "sub": "What the card slot takes, and what you cannot do with it",
+        "accent": "#ffca85",
+        "footer": "Manufacturer spec pages checked September 2026",
+        "phones": [
+            ("microSD", None, ("microsd-size", "microsd"),
+             "#61ffca", "THE STORAGE", "up to 2 TB - media only, never apps"),
+            ("nano-SIM", None, ("nano-sim-tray", "sim-tray", "sim"),
+             "#ff6b6b", "WHAT IT DISPLACES", "the same tray does both, on many phones"),
+        ],
+    },
     "Top 3 Midrange Gaming Phones": {
         "out": "01-midrange-gaming-phones",
         "eyebrow": "~/MIDRANGE GAMING",
