@@ -1,0 +1,372 @@
+<!--
+TITLE:       Upgradeable RAM Laptops: Reading the Spec Sheet
+DESCRIPTION: Which laptops have real RAM slots, and how to tell from the maker's own docs. HP, Lenovo, ASUS and Kingston all word it differently. (142 chars)
+Delete this comment before pasting into Blogger, then fill Blogger's Title
+field with the TITLE line above and the Description field with DESCRIPTION.
+-->
+
+<!--
+SLUG:      /upgradeable-ram-laptops      (NO year)
+KEYWORDS:  laptop, ram, memory, upgrade, sodimm, ddr5, lenovo, hp, asus
+
+NO PRICES IN THIS POST. It is a reference article, not a roundup, so there is no
+price to date. See NOTES.md for the reasoning.
+
+EVERY FACT BELOW IS QUOTED FROM THE VENDOR'S OWN DOCUMENT. Full source list and
+wording is in NOTES.md. Nothing here is from a review site or a forum answer.
+
+  Lenovo PSREF (psref.lenovo.com) - the "Memory Slots" field is authoritative:
+    IdeaPad Slim 3 15IRH10  "One memory soldered to systemboard, one DDR5 SODIMM
+                            slot, dual-channel capable"
+                            "Up to 24GB (8GB soldered + 16GB SODIMM)"
+    ThinkPad E14 Gen 6 (Intel) "Two DDR5 SODIMM slots"
+                            "Up to 64GB DDR5-5600"
+    ThinkPad E14 Gen 6 (AMD)   same two slots, but "The 64GB memory is for
+                            special bid only"
+    ThinkPad L14 Gen 6 (Intel) "Two DDR5 SODIMM slots", "Up to 64GB DDR5-5600"
+    ThinkPad 11e 5th Gen       "4GB soldered memory, not upgradable"
+    Footnote on IdeaPad Slim 3 "Installed memory is actually DDR5-5600 but runs
+                            as DDR5-4800 due to platform limitation"
+
+  HP Maintenance and Service Guide (kaas.hpcloud.hp.com) - THE CENTRAL POINT.
+  HP uses near-identical wording for opposite hardware:
+    Pavilion 15          "Two SODIMM memory module slots,
+                          non-customer-accessible/non-upgradable"
+    HP 15 Laptop PC      "Two SODIMM slots, not customer accessible or upgradeable"
+    HP 15 Notebook PC    "Two SODIMM customer-accessible/upgradable memory module
+                          slots"
+    OMEN by HP 15        "Two SODIMM slots, customer accessible/upgradeable"
+    Victus by HP 15.6    "Two memory slots supporting up to 16 GB of RAM"
+                          (15-fa2xxx/fa3xxx, and 15-fb3xxx AMD)
+    Envy x360 14 (14-fc0xxx) "The memory is soldered to the motherboard, it
+                          cannot be upgraded"
+
+  ASUS product tech-spec pages (asus.com):
+    Vivobook 15 (F1502)  "8GB DDR4 on board 8GB DDR4 SO-DIMM Max Total system
+                          memory up to:16GB"
+    Vivobook 16 (M1607)  "Max Total system memory up to:32GB"
+    TUF Gaming A15       "16GB DDR5-4800 SO-DIMM, Max Capacity:64GB"
+                          "2x M.2 PCIe 2x DDR5 SO-DIMM slots"
+    TUF Gaming F16 2025  "16GB DDR5 on board, 16GB DDR5-5600 SO-DIMM ...
+                          Max Capacity:64GB"
+    ASUS's own footnote: "Memory specification is rated for 5600MHz, but due to a
+                          CPU limitation is limited to 4800MHz."
+
+  Kingston compatibility database (kingston.com) - one comparable number:
+    ThinkBook 14 G6 IRL     "2 Socket(s)"
+    TUF Gaming F16 (2024)   "2 Socket(s)"
+    Vivobook 15 (X1504)     "1 Socket(s)", "4 GB (Non-removable)",
+                            "Maximum 12 GB with 4GB soldered"
+    ThinkPad Twist S230u    "0 Slot(s) (Memory soldered to systemboard)"
+    Dell Precision 5690     "0 Socket(s) for memory"
+    HP OmniBook 5 16       "0 Socket(s) for DRAM"
+
+  The 30-second check, from ASUS's guidance and Lenovo support:
+    "If Task Manager does not show a 'Slots used' field, or if it shows '0 of 0
+     slots,' the RAM is soldered."
+  And from HP, for the board's ceiling:
+    wmic memphysical get maxcapacity  ->  kilobytes; divide by 1,048,576
+
+  HONEST CAVEAT, kept in the body: iFixit forum threads show people being told
+  by Task Manager that 32GB is possible on a physically sealed machine. Treat
+  the figure as a strong signal, not proof.
+-->
+
+<!-- IMAGE: upload images/01-upgradeable-ram-laptops.jpg here. One image per
+     post. Upload to Blogger's own media library: Blogger only builds a post
+     thumbnail from an image on blogger.googleusercontent.com, so an image from
+     another host leaves the homepage card blank and og:image missing. Then fix
+     alt (Blogger's dialog writes alt=""), remove the <a href> wrapper Blogger
+     adds, strip style= and border=, and keep width/height. Use /s0/, not
+     /s1600/. Full steps in NOTES.md.
+
+     Two photos inside the graphic, both freely licensed (see NOTES.md):
+       x220-empty-ram-slots.jpg  Siarhei Besarab, CC BY-SA 4.0
+       ddr5-form-factors.jpg     4300streetcar, CC BY 4.0
+     Attribution is repeated in the post footer because both licences require
+     it. Do not remove that footer line.
+-->
+
+<p>Two laptops, same 16&nbsp;GB of memory, same processor generation, same
+price bracket. One of them you can double the memory on in four minutes with a
+screwdriver. The other cannot be upgraded at all, ever, and no amount of money
+changes that after you buy it.</p>
+
+<p>The difference is not advertised, because it is not a specification anybody
+markets. It is a physical arrangement, and the only place it is written down is
+in the manufacturer's own documents — where each brand uses <strong>different
+words for the same hardware</strong>.</p>
+
+<p>That is the whole problem, and it is why so many people get this wrong twice:
+once when buying, and once again when a retailer tells them it is fine.</p>
+
+<h2>Two words that mean opposite things</h2>
+
+<p>Laptop memory comes in two arrangements, and only one of them is
+upgradeable.</p>
+
+<p><strong>Socketed</strong> means the memory sits in a slot on the motherboard
+as a separate removable module — technically a SODIMM, the short notched stick
+you clip in and out. You can pull one out and put a bigger one in. On most
+laptops with this arrangement there are two slots.</p>
+
+<p><strong>Soldered</strong> means the memory chips are bonded directly to the
+board. There is no slot, no clip, and no way in without replacing the entire
+motherboard. The capacity you buy is the capacity you keep, forever.</p>
+
+<p>Thin laptops are almost always soldered, purely for physical reasons: leaving
+slots in would make the machine thicker. That is why upgradeability and
+thinness trade against each other, and why nearly every sub-14-inch notebook
+today is sealed.</p>
+
+<h2>Why the spec sheets lie to you</h2>
+
+<p>Here is HP's own Maintenance and Service Guide, describing four different
+laptops:</p>
+
+<table>
+  <thead>
+    <tr><th>HP model</th><th>HP's wording, verbatim</th><th>Reality</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pavilion 15 Laptop PC</td>
+      <td>"Two SODIMM memory module slots,
+          non-customer-accessible/non-upgradable"</td>
+      <td><strong>Soldered</strong></td>
+    </tr>
+    <tr>
+      <td>HP 15 Laptop PC</td>
+      <td>"Two SODIMM slots, not customer accessible or upgradeable"</td>
+      <td><strong>Soldered</strong></td>
+    </tr>
+    <tr>
+      <td>HP 15 Notebook PC</td>
+      <td>"Two SODIMM customer-accessible/upgradable memory module slots"</td>
+      <td><strong>Upgradeable</strong></td>
+    </tr>
+    <tr>
+      <td>OMEN by HP 15</td>
+      <td>"Two SODIMM slots, customer accessible/upgradeable"</td>
+      <td><strong>Upgradeable</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Every row says "two SODIMM slots". Two of the four are sealed and two are
+open, and <strong>the slot count alone tells you nothing</strong>. The only word
+that separates them is <em>customer-accessible</em> — which is why the useful
+shorthand that circulates on HP's own support forum is this:</p>
+
+<blockquote>
+  <p>"Soldered memory is referred to as <strong>ONBOARD</strong> on HP
+  documentation, so RAM is not soldered."</p>
+</blockquote>
+
+<p>HP is at least consistent in one respect: if a manual never uses the word
+"onboard" for the memory, the memory is in sockets. But you have to know that
+convention before you can use it, and nobody tells you that up front.</p>
+
+<p>Lenovo is much clearer, because its public spec reference — PSREF, the same
+document Lenovo's own sales and support teams work from — has a dedicated
+field. It reads exactly as written, with no interpretation needed:</p>
+
+<table>
+  <thead>
+    <tr><th>Lenovo model</th><th>"Memory Slots", verbatim</th><th>Max</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ThinkPad E14 Gen 6 (Intel)</td>
+      <td>"Two DDR5 SODIMM slots, dual-channel capable"</td>
+      <td>64GB DDR5-5600</td>
+    </tr>
+    <tr>
+      <td>ThinkPad L14 Gen 6 (Intel)</td>
+      <td>"Two DDR5 SODIMM slots, dual-channel capable"</td>
+      <td>64GB DDR5-5600</td>
+    </tr>
+    <tr>
+      <td>ThinkPad E14 Gen 6 (AMD)</td>
+      <td>"Two DDR5 SODIMM slots, dual-channel capable"</td>
+      <td>64GB, but <strong>"for special bid only"</strong></td>
+    </tr>
+    <tr>
+      <td>IdeaPad Slim 3 15IRH10</td>
+      <td>"One memory soldered to systemboard, one DDR5 SODIMM slot"</td>
+      <td>24GB (8GB fixed + 16GB)</td>
+    </tr>
+    <tr>
+      <td>ThinkPad 11e 5th Gen</td>
+      <td>"4GB soldered memory, not upgradable"</td>
+      <td>4GB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ASUS publishes the same information in the spec table on the product page,
+using the phrase <strong>"on board"</strong> for soldered memory — the same
+trick as HP, in a different font.</p>
+
+<ul>
+  <li><strong>Vivobook 15 (F1502)</strong> — "8GB DDR4 on board 8GB DDR4 SO-DIMM
+    Max Total system memory up to:16GB". One slot, 8GB permanently attached.</li>
+  <li><strong>Vivobook 16 (M1607)</strong> — "Max Total system memory up to:32GB",
+    one DDR5 SO-DIMM slot.</li>
+  <li><strong>TUF Gaming A15</strong> — "16GB DDR5-4800 SO-DIMM, Max
+    Capacity:64GB", two DDR5 SO-DIMM slots. Nothing soldered.</li>
+  <li><strong>TUF Gaming F16 (2025)</strong> — "16GB DDR5 on board, 16GB
+    DDR5-5600 SO-DIMM, Max Capacity:64GB", two slots.</li>
+</ul>
+
+<p>Note that last pair. Two laptops from the same product family, one with all
+its memory removable and one with half of it soldered on. "TUF Gaming" is not a
+specification.</p>
+
+<h2>The one number that is comparable across brands</h2>
+
+<p>Vendor prose is incomparable, but one third-party field is not. Kingston
+publishes a compatibility database for every laptop it sells memory for, and
+for each model it gives a plain socket count:</p>
+
+<table>
+  <thead>
+    <tr><th>Model</th><th>Kingston says</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Lenovo ThinkBook 14 G6 IRL</td><td>"2 Socket(s)", 64GB max</td></tr>
+    <tr><td>ASUS TUF Gaming F16 (2024)</td><td>"2 Socket(s)", 32GB max</td></tr>
+    <tr><td>ASUS Vivobook 15 (X1504)</td><td>"1 Socket(s)", "4 GB (Non-removable)", 12GB with 4GB soldered</td></tr>
+    <tr><td>Lenovo ThinkPad Twist S230u</td><td>"0 Slot(s) (Memory soldered to systemboard)"</td></tr>
+    <tr><td>Dell Precision 5690</td><td>"0 Socket(s) for memory"</td></tr>
+    <tr><td>HP OmniBook 5 16 (af1xxx)</td><td>"0 Socket(s) for DRAM"</td></tr>
+  </tbody>
+</table>
+
+<p>"N Socket(s)" means the same thing on every row. That makes it the fastest
+way to check a specific machine: search the model on Kingston's memory finder
+and read one number. It is also the only source in this list that is written
+down consistently enough to compare across brands.</p>
+
+<h2>The 30-second check, before you buy anything</h2>
+
+<p>You can settle this on any laptop in about half a minute, without opening
+it and without buying it first.</p>
+
+<p>Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> to open Task Manager,
+go to the <strong>Performance</strong> tab, and click <strong>Memory</strong> in
+the left column. Read the <strong>Slots used</strong> field.</p>
+
+<ul>
+  <li><strong>"2 of 2"</strong> — both slots filled, both removable. Fully
+    upgradeable.</li>
+  <li><strong>"1 of 2"</strong> — one slot free. The best case: you can add a
+    module without removing anything.</li>
+  <li><strong>"0 of 0", or no Slots used field at all</strong> — soldered. This
+    is the rule ASUS states explicitly: "If Task Manager does not show a 'Slots
+    used' field, or if it shows '0 of 0 slots,' the RAM is soldered."</li>
+</ul>
+
+<p>If you want the ceiling the board itself accepts rather than what is fitted
+today, HP documents a second command:</p>
+
+<blockquote>
+  <p><code>wmic memphysical get maxcapacity</code></p>
+  <p>"The capacity is shown in Kilobytes, so you have to convert to Gigabytes by
+  dividing the number provided in the report by 1,048,576."</p>
+</blockquote>
+
+<p><strong>Be honest about the limits of this.</strong> It is a strong signal,
+not proof. There are documented cases of Task Manager reporting 32GB of
+headroom on machines that are physically sealed, because the firmware reports
+what the memory controller supports rather than what you can physically reach.
+Where the two disagree, the service manual wins.</p>
+
+<h2>Two traps that cost people their money</h2>
+
+<h3>The "max memory" number is a ceiling, not an invitation</h3>
+
+<p>PSREF lists the ThinkPad E14 Gen 6 (AMD) at "Up to 64GB DDR5-4800" — and then
+adds, in the notes, "The 64GB memory is for special bid only." A spec sheet read
+carelessly tells you 64GB is a supported configuration. It is not something you
+can order, and not something you are expected to fit.</p>
+
+<p>The IdeaPad Slim 3 15IRH10 has the same shape of problem without the
+footnote. It has one soldered 8GB chip and one slot, so its real ceiling is
+"Up to 24GB (8GB soldered + 16GB SODIMM)". You cannot reach 32GB no matter how
+many 16GB modules you buy, because the 8GB is permanent and the arithmetic does
+not work. Every laptop with soldered memory has a ceiling like this, and it is
+always lower than the retailer's "up to" suggests.</p>
+
+<h3>The RAM speed you get is not the speed you paid for</h3>
+
+<p>Both Lenovo and ASUS footnoted this independently, in almost identical
+words:</p>
+
+<ul>
+  <li>Lenovo, IdeaPad Slim 3 15IRH10: "Installed memory is actually DDR5-5600
+    but runs as DDR5-4800 due to platform limitation."</li>
+  <li>ASUS, TUF Gaming A15: "Memory specification is rated for 5600MHz, but due
+    to a CPU limitation is limited to 4800MHz."</li>
+</ul>
+
+<p>This is not a defect and it barely affects anything you will notice. It does
+mean that buying faster memory than the spec sheet quotes is buying money you
+cannot spend — the processor will run it slower either way.</p>
+
+<h2>What to actually look for</h2>
+
+<p>Three questions, in this order, and they settle the decision:</p>
+
+<ol>
+  <li><strong>Does Task Manager show "1 of 2" or "2 of 2"?</strong> If it shows
+    slots, you can upgrade. If it shows none, you cannot, and nothing else on
+    the page will change that.</li>
+  <li><strong>Does the vendor document say "on board" or "onboard" anywhere in
+    the memory section?</strong> If yes, part of your memory is fixed for the
+    life of the machine.</li>
+  <li><strong>Is the stated maximum compatible with the soldered amount?</strong>
+    The ceiling is soldered memory plus whatever fits in the slots, not a
+    headline number.</li>
+</ol>
+
+<p>If a retailer tells you a laptop's memory can be upgraded, ask them which
+slot. If the answer names a document — PSREF, a service manual, a Kingston
+socket count — you have your answer. If it does not, you are being told what
+you want to hear.</p>
+
+<p>This matters more when the laptop is meant to last. A school machine bought
+cheap and soldered is a machine you replace in four years; the same machine
+with one free slot can be carried through a whole course of study. It is worth
+spending two minutes on before you spend any money at all — the reasoning
+behind our <a href="/2026/09/3-cheap-laptops-for-school-that-hold-up.html">cheap
+laptops for school that hold up</a> picks assumes you have checked this first.</p>
+
+<p>It also cuts against the "AI laptop" pitch. Much of what those machines
+advertise is a neural processor that the machine's own memory cannot usefully
+feed, and several of the models in this article ship with half their memory
+soldered. We looked at that gap separately in
+<a href="/2026/09/3-budget-laptops-advertised-as-ai-none.html">budget
+laptops advertised as AI with no AI chip</a>.</p>
+
+<h2>One more thing worth knowing</h2>
+
+<p>Even on a fully socketed laptop, memory is not the only upgrade worth
+having. Several models in these tables ship with short M.2 2242 SSDs, a
+smaller-than-standard form factor: the IdeaPad Slim 3 15IRH10 takes
+"Two M.2 2242 PCIe 4.0 x4 slots" and nothing else. A common 2280 drive will not
+physically fit, and that mistake is easier to make than the RAM one because
+nobody warns you about it.</p>
+
+<p>Both upgrades are worth doing on the right machine. On the wrong machine,
+neither is possible, and the only fix is to buy a different computer — which is
+the expensive lesson this article exists to prevent.</p>
+
+<p style="font-size:.82rem;color:#6c6785;border-top:1px solid rgba(255,255,255,.07);padding-top:1rem;margin-top:2rem">
+<strong>Image credits.</strong> Motherboard photograph by Siarhei Besarab,
+CC BY-SA 4.0. DDR5 module form factors photograph by 4300streetcar, CC BY 4.0.
+Both via Wikimedia Commons. Vendor specifications checked September 2026 —
+memory layouts change between model numbers of the same machine, so check the
+exact model code before buying. Tested by reading manufacturer documentation,
+not by disassembly.
+</p>

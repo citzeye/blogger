@@ -284,6 +284,33 @@
     border-bottom:none;text-decoration:none;color:var(--accent);
   }
   .post-body a:hover{color:var(--accent-soft);border-bottom-color:var(--accent-soft)}
+
+  /* TABLE OF CONTENTS
+     AGENT.md §13.8 asks long articles to carry a list of contents. The old
+     third-party TOC widget is gone (cdn.rawgit.com was shut down in 2019), so
+     the theme builds it itself in JS from the post's own headings. No CDN,
+     nothing to break.
+     .post-toc is inserted by that script, not written into any post, and it
+     stays display:none until the script has filled it - that keeps the reserved
+     space at zero for posts with too few headings to deserve one. */
+  .post-toc{display:none;margin:0 0 1.4rem;padding:var(--s5) var(--s6);background:var(--bg-card);border:1px solid var(--border-soft);border-left:3px solid var(--accent);border-radius:var(--r)}
+  .post-toc[data-ready='1']{display:block}
+  .post-toc-title{margin:0 0 .55rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-soft)}
+  .post-toc ol,.post-toc ul{list-style:none;padding:0;margin:0;counter-reset:none}
+  .post-toc li{margin:0}
+  .post-toc a{display:block;padding:.3rem 0;color:var(--dim);font-size:.82rem;line-height:1.45;border-bottom:0;text-decoration:none;transition:color .15s ease}
+  .post-toc a:hover{color:var(--accent-soft);border-bottom:0}
+  .post-toc .toc-h3 a{padding-left:1rem;font-size:.78rem}
+  /* Anchor targets must clear the fixed navbar, otherwise a jump link parks the
+     heading underneath it. #outer-wrapper reserves 38px, so 60px leaves a little
+     breathing room without eating the heading. */
+  .post-body h2[id],.post-body h3[id],.post-body h4[id]{scroll-margin-top:60px}
+  .post-body h2[id]:target,.post-body h3[id]:target{color:var(--accent-soft)}
+  @media (max-width:480px){
+    .post-toc{padding:var(--s4) var(--s5)}
+    .post-toc a{font-size:.78rem}
+  }
+
   .post-body ul,.post-body ol{padding-left:1.15rem;margin:0 0 .9rem}
   .post-body ul li{position:relative;padding-left:.7rem;margin:.2rem 0}
   .post-body ul>li::before{content:'\2192';position:absolute;left:0;color:var(--accent)}
@@ -746,14 +773,157 @@
   /*]]>*/
   </script>
 
-  <!-- AdSense: ONE loader for the whole page, explicit ?client= form.
-       crossorigin="anonymous" is REQUIRED by Google when ?client= is used.
-       Do not add a second adsbygoogle.js <script> anywhere else - the old
-       scroll-lazy injector and the per-ad copy are both gone, because two
-       loaders fight each other and the ad that renders is unpredictable.
-       enable_page_level_ads was removed on purpose: Auto Ads inject extra
-           units wherever it likes, which broke the two-slot rule. -->
-  <script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4050278743595276' crossorigin='anonymous'/>
+  <!-- AdSense loader (AGENT.md §5 + §6): third-party script is NOT allowed to
+       block render, so adsbygoogle.js is injected on the first scroll instead of
+       being a <script> in <head>. One loader for the whole page - do not add a
+       second copy, two loaders fight and the rendered ad becomes unpredictable.
+       enable_page_level_ads stays per §6; Auto Ads can add units of its own, so
+       check the AdSense dashboard after upload if unit count drifts past two. -->
+  <script type='text/javascript'>
+  /*<![CDATA[ */
+  (function () {
+    var loaded = false;
+    function inject() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4050278743595276';
+      s.crossOrigin = 'anonymous';
+      var first = document.getElementsByTagName('script')[0];
+      first.parentNode.insertBefore(s, first);
+    }
+    // AGENT.md §6 asks for scroll-based lazy loading rather than an
+    // IntersectionObserver, so keep the scroll listener and add a load
+    // fallback: without it, a reader who never scrolls never sees an ad.
+    window.addEventListener('scroll', function () {
+      var y = window.pageYOffset ||
+              (document.documentElement && document.documentElement.scrollTop) ||
+              (document.body && document.body.scrollTop) || 0;
+      if (y > 0) inject();
+    }, { passive: true });
+    window.addEventListener('load', inject);
+  })();
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: 'ca-pub-4050278743595276',
+    enable_page_level_ads: true
+  });
+  /* ]]> */
+  </script>
+
+  <!-- TABLE OF CONTENTS (AGENT.md §13.8)
+       Builds a contents list for long articles out of the post's own H2/H3, so
+       no post file has to carry a hand-written one and nothing is fetched from
+       a third party. Rules it follows:
+         - only on item pages, and only when there are enough headings to be
+           worth a contents list (MIN_HEADINGS);
+         - a heading that already has an id is left alone, so a post can override
+           its own anchors;
+         - headings that only contain an image, a link or a script are skipped -
+           they have no readable title to list;
+         - the block is only revealed once it has real links in it, so a short post
+           never reserves empty space (see .post-toc in the CSS above).
+       Insertion point: after the first paragraph of the body, which is where a
+       reader expects a contents list and which keeps it above the fold on both
+       desktop and mobile. -->
+  <script type='text/javascript'>
+  /*<![CDATA[ */
+  (function () {
+    var MIN_HEADINGS = 4;
+    var TOC_LEVELS = { H2: 0, H3: 1 };
+
+    function slugify(text) {
+      return text.toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '') || 'section';
+    }
+
+    function buildToc() {
+      var body = document.querySelector('.post-body');
+      if (!body || body.querySelector('.post-toc')) return;
+
+      var headings = body.querySelectorAll('h2, h3');
+      if (headings.length < MIN_HEADINGS) return;
+
+      var used = {};
+      var entries = [];
+      var anchors = [];
+
+      for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        // A heading wrapped in a link or holding only an image has no plain text
+        // to show in the contents list.
+        var title = (h.textContent || '').trim();
+        if (!title) continue;
+
+        var id = h.id;
+        if (!id) {
+          var base = slugify(title);
+          var n = used[base] = (used[base] || 0) + 1;
+          id = n === 1 ? base : base + '-' + n;
+          h.id = id;
+        }
+        entries.push({ level: TOC_LEVELS[h.tagName.toUpperCase()], title: title, id: id });
+        anchors.push(id);
+      }
+
+      if (entries.length < MIN_HEADINGS) return;
+
+      var nav = document.createElement('nav');
+      nav.className = 'post-toc';
+      nav.setAttribute('aria-label', 'Table of contents');
+
+      var caption = document.createElement('p');
+      caption.className = 'post-toc-title';
+      caption.appendChild(document.createTextNode('Table of contents'));
+      nav.appendChild(caption);
+
+      var list = document.createElement('ol');
+      for (var j = 0; j < entries.length; j++) {
+        var li = document.createElement('li');
+        if (entries[j].level === 1) li.className = 'toc-h3';
+        var a = document.createElement('a');
+        a.href = '#' + entries[j].id;
+        a.appendChild(document.createTextNode(entries[j].title));
+        li.appendChild(a);
+        list.appendChild(li);
+      }
+      nav.appendChild(list);
+      nav.setAttribute('data-ready', '1');
+
+      var firstPara = null;
+      var children = body.children;
+      for (var k = 0; k < children.length; k++) {
+        if (children[k].tagName === 'P' && (children[k].textContent || '').trim()) {
+          firstPara = children[k];
+          break;
+        }
+      }
+      if (firstPara) firstPara.parentNode.insertBefore(nav, firstPara.nextSibling);
+      else body.insertBefore(nav, body.firstChild);
+
+      // A jump link pointing at an id nothing owns would silently do nothing,
+      // which is how a reader ends up convinced a contents list is broken.
+      document.addEventListener('click', function (ev) {
+        var link = ev.target && ev.target.closest ? ev.target.closest('a[href^="#"]') : null;
+        if (!link) return;
+        var target = link.getAttribute('href').slice(1);
+        if (!target || document.getElementById(target)) return;
+        ev.preventDefault();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', buildToc);
+    } else {
+      buildToc();
+    }
+  })();
+  /* ]]> */
+  </script>
 
   </head>
 
@@ -1568,7 +1738,7 @@
     document.write('</ul>');
   }
   </script>
-  <script src="/feeds/posts/default?alt=json-in-script&max-results=5&callback=recentpostslist"></script>
+  <script src='/feeds/posts/default?alt=json-in-script&amp;max-results=5&amp;callback=recentpostslist'></script>
   <!-- Latest Posts -->
   </div>]]></b:widget-setting>
       </b:widget-settings>

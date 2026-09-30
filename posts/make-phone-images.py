@@ -84,6 +84,27 @@ CONFIGS = {
              "#61ffca", "CHEAPEST WAY IN", "6.7in AMOLED"),
         ],
     },
+    # A reference article, not a roundup: the two things a reader must be able
+    # to recognise, and no prices anywhere. Both photos are of socketed memory -
+    # a clean photo of memory soldered to a board does not exist under a free
+    # licence - so the captions describe what is actually shown rather than
+    # asserting the opposite of it. "price" is None for these cards and the
+    # footer comes from the config, since "prices move weekly" would be a lie.
+    "Upgradeable RAM Laptops": {
+        "out": "01-upgradeable-ram-laptops",
+        "layout": "compare",
+        "eyebrow": "~/LAPTOP HARDWARE",
+        "title": "UPGRADEABLE RAM LAPTOPS",
+        "sub": "What each brand's own spec sheet actually says",
+        "accent": "#61ffca",
+        "footer": "Vendor documents verified September 2026",
+        "phones": [
+            ("The slots", None, ("x220-empty-ram-slots", "empty-ram-slots", "x220"),
+             "#61ffca", "WHAT UPGRADABLE LOOKS LIKE", "two SODIMM sockets, modules lift straight out"),
+            ("The module", None, ("ddr5-form-factors", "form-factors", "ddr5"),
+             "#a277ff", "WHAT YOU BUY", "DDR5 SODIMM - the short, notched stick"),
+        ],
+    },
     "Top 3 Midrange Gaming Phones": {
         "out": "01-midrange-gaming-phones",
         "eyebrow": "~/MIDRANGE GAMING",
@@ -107,6 +128,13 @@ GAP = 24
 CARD_W = (W - 2 * M - 2 * GAP) // 3
 STAGE_X, STAGE_Y = 20, 122
 STAGE_W, STAGE_H = CARD_W - 40, 430
+
+# Two-up layout for reference posts. Same 1600x1067 canvas and same header
+# geometry, so both kinds of graphic sit identically in a post card - only the
+# card grid below the rule changes.
+CMP_CARD_W = (W - 2 * M - GAP) // 2
+CMP_STAGE_W = CMP_CARD_W - 40
+CMP_STAGE_H = 470
 
 
 def esc(s):
@@ -135,13 +163,13 @@ def collect(refdir, phones):
     return found
 
 
-def normalise(src, work):
+def normalise(src, work, stage_w=STAGE_W, stage_h=STAGE_H):
     """Scale the photo to FIT the product stage and pad it to the exact stage
     size on white.
 
     Scaling is 'fit' not 'fill', so a portrait handset photo is never cropped -
     it is centred in the stage with white either side. The output is exactly
-    STAGE_W-10 x STAGE_H-10 so it can be composited at a fixed offset with no
+    stage-10 on each side so it can be composited at a fixed offset with no
     further resampling.
 
     Per-product working files: writing them all to one shared file made every
@@ -152,8 +180,8 @@ def normalise(src, work):
         ["magick", src, "-fuzz", "4%", "-trim", "+repage",
          "-background", "white", "-alpha", "remove", "-alpha", "off",
          "-bordercolor", "white", "-border", "6",
-         "-resize", f"{STAGE_W - 10}x{STAGE_H - 10}",
-         "-gravity", "center", "-extent", f"{STAGE_W - 10}x{STAGE_H - 10}",
+         "-resize", f"{stage_w - 10}x{stage_h - 10}",
+         "-gravity", "center", "-extent", f"{stage_w - 10}x{stage_h - 10}",
          "-quality", "92", work], check=True)
     return hashlib.md5(open(work, "rb").read()).hexdigest()
 
@@ -184,8 +212,43 @@ def build(names, cfg):
         s.append(text(x + CARD_W - STAGE_X, CARD_Y + 636, note, 20, DIM,
                       anchor="end"))
 
-    s.append(text(W - M, H - 34, "Prices move weekly. Re-check before you buy.",
+    s.append(text(W - M, H - 34, cfg.get("footer", "Prices move weekly. Re-check before you buy."),
                   22, DIM, anchor="end"))
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+            f'viewBox="0 0 {W} {H}">\n' + "\n".join(s) + "\n</svg>\n")
+
+
+def build_compare(names, cfg):
+    """Two cards, no price line - for reference posts that compare two states of
+    a component rather than recommending products.
+
+    Same canvas, same header block, so the graphic reads as part of the same
+    set as the roundup ones. The note sits under a rule instead of a price,
+    which keeps the card bottom aligned without inventing a figure.
+    """
+    s = [f'<rect width="{W}" height="{H}" fill="{BG}"/>',
+         f'<rect width="{W}" height="8" fill="{FG}"/>',
+         text(M, 104, cfg["eyebrow"], 28, DIM, True),
+         text(M, 190, cfg["title"], 58, FG, True),
+         text(M, 240, cfg["sub"], 26, MUTED),
+         f'<rect x="{M}" y="272" width="56" height="6" fill="{cfg["accent"]}"/>']
+
+    for i, (label, _p, _k, colour, tag, note) in enumerate(cfg["phones"]):
+        x = M + i * (CMP_CARD_W + GAP)
+        s.append(f'<rect x="{x}" y="{CARD_Y}" width="{CMP_CARD_W}" height="{CARD_H}" '
+                 f'rx="6" fill="{CARD}" stroke="{colour}" stroke-width="3"/>')
+        s.append(text(x + STAGE_X, CARD_Y + 50, tag, 26, colour, True))
+        s.append(text(x + STAGE_X, CARD_Y + 100, label, 36, FG, True))
+        s.append(f'<rect x="{x + STAGE_X}" y="{CARD_Y + STAGE_Y}" '
+                 f'width="{CMP_STAGE_W}" height="{CMP_STAGE_H}" rx="4" fill="{STAGE}"/>')
+        s.append(f'<image href="{names[i]}" x="{x + STAGE_X + 5}" '
+                 f'y="{CARD_Y + STAGE_Y + 5}" width="{CMP_STAGE_W - 10}" '
+                 f'height="{CMP_STAGE_H - 10}" preserveAspectRatio="xMidYMid meet"/>')
+        s.append(f'<rect x="{x + STAGE_X}" y="{CARD_Y + 620}" '
+                 f'width="{CMP_STAGE_W}" height="1" fill="{BORDER}"/>')
+        s.append(text(x + STAGE_X, CARD_Y + 660, note, 22, DIM))
+
+    s.append(text(W - M, H - 34, cfg["footer"], 22, DIM, anchor="end"))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
             f'viewBox="0 0 {W} {H}">\n' + "\n".join(s) + "\n</svg>\n")
 
@@ -197,19 +260,22 @@ def placeholders(cfg, refdir):
     goes hunting for photos. The output is written with PREVIEW- in the name
     so a preview can never be mistaken for, or pasted over, the real graphic.
     """
+    cmp_layout = cfg.get("layout") == "compare"
+    card_w = CMP_CARD_W if cmp_layout else CARD_W
+    stage_w = CMP_STAGE_W if cmp_layout else STAGE_W
+    stage_h = CMP_STAGE_H if cmp_layout else STAGE_H
     names = []
     for i in range(len(cfg["phones"])):
         w = os.path.join(refdir, f"_pv{i}.png")
         subprocess.run(
-            ["magick", "-size", f"{STAGE_W - 10}x{STAGE_H - 10}",
+            ["magick", "-size", f"{stage_w - 10}x{stage_h - 10}",
              f"xc:#e4e4ea", "-fill", "#b9b9c4",
-             "-draw", f"roundrectangle 90,40 {STAGE_W - 130},{STAGE_H - 40} 26,26",
+             "-draw", f"roundrectangle 90,40 {stage_w - 130},{stage_h - 40} 26,26",
              "-font", PREVIEW_FONT, "-gravity", "south", "-pointsize", "26",
              "-fill", "#8a8a96",
              "-annotate", "+0+18", "PHOTO NEEDED", w], check=True)
         names.append(os.path.basename(w))
-    svg = build(names, cfg)
-    base = os.path.join(HERE, "..", "..", "posts", cfg["out"])
+    svg = (build_compare(names, cfg) if cmp_layout else build(names, cfg))
     base = os.path.abspath(os.path.join(refdir, "..", "PREVIEW-" + cfg["out"]))
     with open(base + ".svg", "w", encoding="utf-8") as f:
         f.write(svg)
@@ -218,7 +284,7 @@ def placeholders(cfg, refdir):
     for i in range(len(cfg["phones"])):
         subprocess.run(["magick", base + ".png",
                         os.path.join(refdir, f"_pv{i}.png"),
-                        "-geometry", f"+{M + i * (CARD_W + GAP) + STAGE_X + 5}"
+                        "-geometry", f"+{M + i * (card_w + GAP) + STAGE_X + 5}"
                                     f"+{CARD_Y + STAGE_Y + 5}",
                         "-composite", base + ".png"], check=True)
     subprocess.run(["magick", base + ".png", "-quality", "90", "-strip",
@@ -264,10 +330,15 @@ def main():
         print(f"\nDrop them into:\n  {refdir}")
         sys.exit(1)
 
+    cmp_layout = cfg.get("layout") == "compare"
+    card_w = CMP_CARD_W if cmp_layout else CARD_W
+    stage_w = CMP_STAGE_W if cmp_layout else STAGE_W
+    stage_h = CMP_STAGE_H if cmp_layout else STAGE_H
+
     works, names, digests = [], [], []
     for i, (label, *_) in enumerate(cfg["phones"]):
         work = os.path.join(mri.REFS, f"_ph{i}.jpg")
-        digests.append(normalise(found[label], work))
+        digests.append(normalise(found[label], work, stage_w, stage_h))
         works.append(work)
         names.append(os.path.basename(work))
 
@@ -275,10 +346,10 @@ def main():
         dup = [cfg["phones"][i][0] for i, d in enumerate(digests) if digests.count(d) > 1]
         for w in works:
             os.remove(w)
-        sys.exit("ABORT: these phones resolved to the same photo: "
+        sys.exit("ABORT: these photos resolved to the same image: "
                  + ", ".join(dup))
 
-    svg = build(names, cfg)
+    svg = (build_compare(names, cfg) if cmp_layout else build(names, cfg))
     base = os.path.join(mri.IMG, cfg["out"])
     with open(base + ".svg", "w", encoding="utf-8") as f:
         f.write(svg)
@@ -288,7 +359,7 @@ def main():
     # afterwards, then the build steps are deleted.
     for i in range(len(cfg["phones"])):
         subprocess.run(["magick", base + ".png", works[i],
-                        "-geometry", f"+{M + i * (CARD_W + GAP) + STAGE_X + 5}"
+                        "-geometry", f"+{M + i * (card_w + GAP) + STAGE_X + 5}"
                                     f"+{CARD_Y + STAGE_Y + 5}",
                         "-composite", base + ".png"], check=True)
     # Belt and braces: confirm every photo actually landed inside its own card.
