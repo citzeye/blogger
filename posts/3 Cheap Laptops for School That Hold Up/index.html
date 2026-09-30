@@ -30,14 +30,22 @@ UK PRICING        : NOT INVENTED. All three are HP/Lenovo/Acer lines that are
                      quoting a number. Add GBP only after checking a UK source.
 POST FOLDER      : posts/3 Cheap Laptops for School That Hold Up/
 IMAGES           : 1 graphic, all three laptops, each name at the top of its
-                       own card. 1080x1968 WebP, ~88 KB.
-                       images/01-laptops-for-school.webp
-                     WebP is the only format that ships. The generator deletes
-                     the .svg and .png build steps on every run, so there is
-                     nothing to upload by mistake. Never upload the .svg: its
-                     renderer ignores <image href>, so it has the text and boxes
-                     but zero product photos.
-                     Rebuild: python3 posts/make-laptop-images.py "<folder>"
+                       own card. 1080x1968 JPEG, ~219 KB.
+                       img/post/3-cheap-laptops-for-school-that-hold-up/
+                           01-laptops-for-school.jpg
+                     Hosted on GitHub, not Blogger, on purpose. Blogger
+                     re-encodes every upload to JPEG and caps width at 1600px
+                     on the longest side, which silently shipped this graphic
+                     as 878x1600. Served from raw.githubusercontent it arrives
+                     byte-for-byte at full resolution, so the text stays crisp
+                     on a high-DPR phone.
+                     Only JPEG ships. The generator deletes the .svg and .png
+                     build steps on every run. Never upload the .svg: its
+                     renderer ignores <image href>, so it has the text and
+                     boxes but zero product photos.
+                     Rebuild, then commit and push so the URL updates:
+                         python3 posts/make-laptop-images.py "<folder>"
+                         git add -A && git commit -m "..." && git push
 VERIFY BEFORE PUBLISHING:
 - Re-check all three prices on a US retailer and add a UK price if you can
   verify one.
@@ -63,7 +71,7 @@ Chromebook or a Windows machine built around a low-power chip.</p>
 <p>Both are legitimate answers to a school workload. This guide picks three
 machines that do the job well, explains what actually matters at this price,
 and is explicit about what you give up. All three are sold in the US and the
-UK, and every price here is a range observed at US retailers in September 2026.</p> <img alt="Three cheap laptops for school side by side: Acer Chromebook Plus 514, Lenovo IdeaPad Slim 3i and HP OmniBook 3, with their US street prices checked September 2026" src="images/01-laptops-for-school.webp" width="1080" height="1968">
+UK, and every price here is a range observed at US retailers in September 2026.</p> <img alt="Three cheap laptops for school side by side: Acer Chromebook Plus 514, Lenovo IdeaPad Slim 3i and HP OmniBook 3, with their US street prices checked September 2026" src="https://raw.githubusercontent.com/citzeye/blogger/main/img/post/3-cheap-laptops-for-school-that-hold-up/01-laptops-for-school.jpg" width="1080" height="1968">
 
 
 <h2>What $300 Actually Buys You</h2>
