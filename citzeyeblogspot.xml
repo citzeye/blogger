@@ -7,7 +7,25 @@
   <meta content='5733A27601DBD24395C4603318E18FE8' name='msvalidate.01'/>
   <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
-  <meta content='Phones, computers and PC hardware. Specs, tips and buying guides for anyone who wants to understand their tech.' name='description'/>
+  <!-- Meta description (AGENT.md §7 wants one per article).
+       This was a hardcoded string, so EVERY post on the blog served the same
+       site-wide sentence as its description - Google had no per-post snippet
+       text to work with, and five articles competed on identical metadata.
+       Blogger exposes the per-post Search Description field as
+       data:post.metaDescription, so prefer that, fall back to the blog-level
+       one, and only then to the hardcoded default for the homepage and for
+       pages that have neither field filled in.
+       The snippet is truncated to 160 chars because that is roughly where
+       Google stops rendering, and a longer description is cut mid-word anyway. -->
+  <b:if cond='data:post.metaDescription'>
+    <meta expr:content='data:post.metaDescription.substring(0, 160)' name='description'/>
+  <b:else/>
+    <b:if cond='data:blog.metaDescription'>
+      <meta expr:content='data:blog.metaDescription' name='description'/>
+    <b:else/>
+      <meta content='Phones, computers and PC hardware. Specs, tips and buying guides for anyone who wants to understand their tech.' name='description'/>
+    </b:if>
+  </b:if>
   <meta content='ocit' name='Author'/>
   <meta content='en_US' property='og:locale'/>
   <meta content='index, follow' name='robots'/>
