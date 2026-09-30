@@ -59,10 +59,15 @@ SPECS - every one sourced, and this is the section to re-check:
 
 PRICES - all three now verified. USD, US market, checked September 2026:
 
-  OnePlus 13R             $499.99 street / $599.99 list
-    oneplus.com/us hero banner reads "OnePlus 13R From $499.99 / $599.99"
-    corroborated by Android Central ($499.99 at Amazon, $599.99 retail),
-    Tom's Guide ($499, $100 off), PhoneArena (just under $500)
+  OnePlus 13R             $549.99 live, $599.99 list, $499 promo
+    AUTHORITATIVE: the JSON-LD product block on oneplus.com/us/oneplus-13r
+    reads "price": "549.99", "priceCurrency": "USD",
+    "priceValidUntil": "2026-12-31", availability InStock.
+    CORRECTION WORTH RECORDING: search snippets and the site's own hero
+    banner both said "$499.99", and Android Central / Tom's Guide /
+    PhoneArena all repeat $499 because they were reporting a promotion.
+    A promo snapshot is not the live price. The card therefore shows $549,
+    and the article says $499 is the sale price and $599.99 the ceiling.
   Nothing Phone (4a) Pro  $499 at launch, ~$449 on sale
     Billboard ("starting at $499 and topping out at $599"),
     PhoneArena Jun 2026 ("costs $499"), Smartprix US price list Sep 5 2026

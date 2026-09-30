@@ -91,7 +91,7 @@ CONFIGS = {
         "sub": "US street prices, checked September 2026",
         "accent": "#61ffca",
         "phones": [
-            ("OnePlus 13R", 499, ("oneplus-13r", "13r", "oneplus13r"),
+            ("OnePlus 13R", 549, ("oneplus-13r", "13r", "oneplus13r"),
              "#ff6b6b", "BEST CHIP", "UFS 4.0, 120Hz LTPO"),
             ("Nothing Phone (4a) Pro", 449, ("nothing-4a-pro", "4a-pro", "4a pro"),
              "#a277ff", "FASTEST SCREEN", "144Hz, 6.83in"),
