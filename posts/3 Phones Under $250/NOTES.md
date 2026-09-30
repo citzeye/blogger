@@ -30,7 +30,9 @@ and every one is written as a range. Sources actually used:
     for 8/256 (smartprix US, Sep 2026); from $213.01 (kimovil). Published as
     $210-255.
   - Xiaomi Redmi Note 14: from $199 (smartprix US); from $199-200 (kimovil).
-    Published as $195-200.
+    Published as $195-200. The graphic shows $197, the midpoint. Note the
+    midpoint of 195-200 is 197.5; 197 is used so the figure is a real price the
+    reader could see on a shelf, not a decimal.
   - Samsung Galaxy A16 5G: $134.97 (smartprix US). Published as ~$135.
   - Motorola Moto G Power (2026): $399.99 on Motorola's own US store; raised
     from $299.99 (PhoneArena, April 2026, on memory chip costs). Published as

@@ -288,7 +288,7 @@ def build_which_one():
 
 if __name__ == "__main__":
     # usage: make-real-images.py "<Post Title folder>"
-    target = sys.argv[1] if len(sys.argv) > 1 else "5 Phones Worth Buying Under IDR 2 Million"
+    target = sys.argv[1] if len(sys.argv) > 1 else "3 Phones Under $250"
     d = set_post_dir(target)
     print(f"post folder: {os.path.basename(d)}")
     for stem, fn in (("01-featured", build_featured),

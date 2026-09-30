@@ -149,7 +149,7 @@ def main(path):
         warn("Not price-led (0-2 price figures)",
              "price-dating checks skipped; only binds articles selling things")
     # Site currency is USD, so prices look like $340 or $300-380. The old
-    # Rp-only pattern silently skipped price-led articles.
+    # A rupiah-only pattern silently skipped USD price-led articles.
     # Strip the editor-notes metadata out of the price scan: "META DESCRIPTION
     # ...and the $ where real AI hardware starts" was being counted as a price.
     body_prices = re.sub(r"META DESCRIPTION.*", "", body)
@@ -234,5 +234,5 @@ def main(path):
     return len(FAIL)
 
 if __name__ == "__main__":
-    p = sys.argv[1] if len(sys.argv) > 1 else "best-phone-under-2-juta.html"
+    p = sys.argv[1] if len(sys.argv) > 1 else "3 Phones Under $250/index.html"
     sys.exit(min(main(p), 99))
