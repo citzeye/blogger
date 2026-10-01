@@ -13,3 +13,10 @@ _SALAH-PRODUK/
 # OS noise
 .DS_Store
 Thumbs.db
+
+# artikel yang belum diputuskan publish. NOTES.md di dalamnya menulis
+# "Not published". Tetap ada di disk, tidak masuk git.
+posts/DRAFT/
+
+# catatan kerja internal. TIDAK di-ignore: isinya catatan brainstorming
+# dan reasoning harga, berguna kalau disk hilang, dan tidak berisi Rahasia.
