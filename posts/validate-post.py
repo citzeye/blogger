@@ -61,12 +61,17 @@ def main(path):
     # Do NOT split on "-->" — the notes block itself contains nested <!-- --> comments.
     m = re.search(r"<!--\s*END (?:EDITOR )?NOTES\s*-->", raw, re.I)
     body = raw[m.end():] if m else raw
-    # A post awaiting a manual image upload carries an
-    # "IMAGE: upload the file" comment instead of a real <img>. That comment is
-    # stripped below along with every other comment, so detect the placeholder
-    # BEFORE stripping, or it vanishes and the image check fails every run.
-    pending_upload = ("IMAGE: upload the file" in body
-                      or "IMAGE: upload images/" in body)
+    # A post awaiting a manual image upload carries no <img>: the graphic is
+    # placed on Blogger by hand, because only an image on Blogger's own CDN
+    # produces a homepage card thumbnail. This used to be spelled by an
+    # "IMAGE: upload the file" comment in the body, but the header no longer
+    # carries scratch lines, so infer it from the artwork sitting on disk.
+    img_dir = os.path.join(os.path.dirname(os.path.abspath(path)), "images")
+    artwork = []
+    if os.path.isdir(img_dir):
+        artwork = [f for f in sorted(os.listdir(img_dir))
+                   if re.match(r"^0\d-.*\.(?:jpg|jpeg|png|webp)$", f, re.I)]
+    pending_upload = bool(artwork)
 
     # Strip HTML comments before any structural check. Comments legitimately
     # mention tags (e.g. "do not add <h1>"), which would otherwise be counted
@@ -94,7 +99,7 @@ def main(path):
     skipped = any(order[i] == "3" and (i == 0 or "2" not in order[:i]) for i in range(len(order)))
     check(not skipped, "Heading hierarchy never skips a level (§12.8)")
 
-    md_val = pick(srcs, "META DESCRIPTION", "DESCRIPTION")
+    md_val = pick(srcs, "META DESCRIPTION", "DESCRIPTION", "DESC")
     md = re.match(r"(.+)", md_val) if md_val else None
     if md:
         d = md.group(1).strip()
@@ -103,11 +108,15 @@ def main(path):
     else:
         check(False, "Meta description declared in editor notes")
 
-    slug_m = pick(srcs, "SLUG")
-    slug = re.match(r"(\S+)", slug_m) if slug_m else None
-    check(bool(slug), "Slug declared")
-    if slug:
-        check(not re.search(r"20\d{2}", slug.group(1)), "No year in slug (§12.2)", slug.group(1))
+    # SLUG is deliberately not checked. Blogger derives the permalink from the
+    # Title field automatically, so there is nothing for this repo to declare;
+    # §12.2's "no year" still holds because the title itself is checked for one.
+    tags_val = pick(srcs, "TAGS", "LABELS")
+    check(bool(tags_val), "Tags declared (Blogger Labels field)",
+          'add "TAGS: Phone, Laptop" so the label can be set on publish')
+    if tags_val:
+        check(not re.search(r"\b20\d{2}\b", tags_val),
+              "No year in tags (§12.2)", tags_val)
 
     # Primary keyword is declared per article in the editor notes, so this
     # validator is not welded to one post. Format:  KEYWORDS: laptop, school
@@ -122,6 +131,20 @@ def main(path):
     check(any(k in first100 for k in kws),
           "Keyword in first 100 words (§1)",
           f"none of {kws} found" if kws else "no KEYWORDS declared")
+
+    # The keyword list is the vocabulary the article is meant to actually cover,
+    # so every term has to turn up in the prose - that is what a search engine
+    # reads. A metadata line is not a substitute. Short tokens need word
+    # boundaries or "pd" matches "update"; longer ones match as substrings so
+    # "sd card" is still found inside "microSD card".
+    prose = re.sub(r"<[^>]+>", " ", body).lower()
+    missing = []
+    for k in kws:
+        pat = rf"\b{re.escape(k)}\b" if len(k) <= 3 else re.escape(k)
+        if not re.search(pat, prose):
+            missing.append(k)
+    check(not missing, "Every keyword appears in the article text",
+          f"missing: {missing}" if missing else f"all {len(kws)} present")
 
     # ---------- §12.7 longlasting ----------
     print("\n[§12 Longlasting]")

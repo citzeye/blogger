@@ -98,3 +98,23 @@ REPLACING THE PUBLISHED POST:
   Recommend A. Do not delete the old URL either way - a 404 on an indexed page
   costs more than a redirect.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+1600x1067 JPEG, 3:2 landscape. It is 3:2 on purpose: the homepage card and
+     the sidebar widget render a 3:2 frame with object-fit contain, so a 3:2
+     source fills that frame exactly - no crop, no letterbox. The handsets inside
+     are portrait, and each sits in its own portrait stage, so none of them is
+     cut either.
+     Upload to Blogger's own media library, NOT to another host. Blogger only
+     builds a post thumbnail from an image on blogger.googleusercontent.com; from
+     any other host data:post.thumbnailUrl comes back empty, the homepage card
+     renders with no picture, and og:image goes missing.
+     After uploading: fix alt (Blogger writes alt=""), strip the <a href> wrapper
+     it adds around the image, drop border= and any inline style, and keep
+     width="1600" height="1067". Use /s0/ rather than /s1600/ if the URL shows a
+     size segment - Blogger caps at 1600px on the longest side and would send
+     back a downscaled copy. Full steps in NOTES.md.

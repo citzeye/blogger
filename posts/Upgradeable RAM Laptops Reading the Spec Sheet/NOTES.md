@@ -166,3 +166,73 @@ the table notes, not given its own section, because it is a different question.
 Both freely licensed, both show the actual hardware (socketed SODIMM slots /
 DDR5 module form factors). Attribution goes in the post footer as
 `AGENT.md`/Commons terms require.
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+SLUG:      /upgradeable-ram-laptops      (NO year)
+KEYWORDS:  laptop, ram, memory, upgrade, sodimm, ddr5, lenovo, hp, asus
+
+NO PRICES IN THIS POST. It is a reference article, not a roundup, so there is no
+price to date. See NOTES.md for the reasoning.
+
+EVERY FACT BELOW IS QUOTED FROM THE VENDOR'S OWN DOCUMENT. Full source list and
+wording is in NOTES.md. Nothing here is from a review site or a forum answer.
+
+  Lenovo PSREF (psref.lenovo.com) - the "Memory Slots" field is authoritative:
+    IdeaPad Slim 3 15IRH10  "One memory soldered to systemboard, one DDR5 SODIMM
+                            slot, dual-channel capable"
+                            "Up to 24GB (8GB soldered + 16GB SODIMM)"
+    ThinkPad E14 Gen 6 (Intel) "Two DDR5 SODIMM slots"
+                            "Up to 64GB DDR5-5600"
+    ThinkPad E14 Gen 6 (AMD)   same two slots, but "The 64GB memory is for
+                            special bid only"
+    ThinkPad L14 Gen 6 (Intel) "Two DDR5 SODIMM slots", "Up to 64GB DDR5-5600"
+    ThinkPad 11e 5th Gen       "4GB soldered memory, not upgradable"
+    Footnote on IdeaPad Slim 3 "Installed memory is actually DDR5-5600 but runs
+                            as DDR5-4800 due to platform limitation"
+
+  HP Maintenance and Service Guide (kaas.hpcloud.hp.com) - THE CENTRAL POINT.
+  HP uses near-identical wording for opposite hardware:
+    Pavilion 15          "Two SODIMM memory module slots,
+                          non-customer-accessible/non-upgradable"
+    HP 15 Laptop PC      "Two SODIMM slots, not customer accessible or upgradeable"
+    HP 15 Notebook PC    "Two SODIMM customer-accessible/upgradable memory module
+                          slots"
+    OMEN by HP 15        "Two SODIMM slots, customer accessible/upgradeable"
+    Victus by HP 15.6    "Two memory slots supporting up to 16 GB of RAM"
+                          (15-fa2xxx/fa3xxx, and 15-fb3xxx AMD)
+    Envy x360 14 (14-fc0xxx) "The memory is soldered to the motherboard, it
+                          cannot be upgraded"
+
+  ASUS product tech-spec pages (asus.com):
+    Vivobook 15 (F1502)  "8GB DDR4 on board 8GB DDR4 SO-DIMM Max Total system
+                          memory up to:16GB"
+    Vivobook 16 (M1607)  "Max Total system memory up to:32GB"
+    TUF Gaming A15       "16GB DDR5-4800 SO-DIMM, Max Capacity:64GB"
+                          "2x M.2 PCIe 2x DDR5 SO-DIMM slots"
+    TUF Gaming F16 2025  "16GB DDR5 on board, 16GB DDR5-5600 SO-DIMM ...
+                          Max Capacity:64GB"
+    ASUS's own footnote: "Memory specification is rated for 5600MHz, but due to a
+                          CPU limitation is limited to 4800MHz."
+
+  Kingston compatibility database (kingston.com) - one comparable number:
+    ThinkBook 14 G6 IRL     "2 Socket(s)"
+    TUF Gaming F16 (2024)   "2 Socket(s)"
+    Vivobook 15 (X1504)     "1 Socket(s)", "4 GB (Non-removable)",
+                            "Maximum 12 GB with 4GB soldered"
+    ThinkPad Twist S230u    "0 Slot(s) (Memory soldered to systemboard)"
+    Dell Precision 5690     "0 Socket(s) for memory"
+    HP OmniBook 5 16       "0 Socket(s) for DRAM"
+
+  The 30-second check, from ASUS's guidance and Lenovo support:
+    "If Task Manager does not show a 'Slots used' field, or if it shows '0 of 0
+     slots,' the RAM is soldered."
+  And from HP, for the board's ceiling:
+    wmic memphysical get maxcapacity  ->  kilobytes; divide by 1,048,576
+
+  HONEST CAVEAT, kept in the body: iFixit forum threads show people being told
+  by Task Manager that 32GB is possible on a physically sealed machine. Treat
+  the figure as a strong signal, not proof.

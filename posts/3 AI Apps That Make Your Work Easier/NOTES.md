@@ -1,5 +1,7 @@
 # 3 AI Apps That Make Your Work Easier
 
+KEYWORDS:  ai, apps, productivity, writing
+
 Working notes for this post. Not published. The reasoning behind
 the claims, the sources, and the checks still to do before this
 post goes out. `index.html` is the only file that gets pasted.
@@ -76,3 +78,10 @@ IMAGES           : 1 graphic. Generate, then copy to
                      img/post/ai-apps-that-make-work-easier/ and push, because
                      Blogger re-encodes uploads to JPEG and caps width at 1600px.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+

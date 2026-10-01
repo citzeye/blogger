@@ -1,5 +1,7 @@
 # 3 Cheap Laptops for School That Hold Up
 
+KEYWORDS:  laptop, school, student, budget
+
 Working notes for this post. Not published. The reasoning behind
 the claims, the sources, and the checks still to do before this
 post goes out. `index.html` is the only file that gets pasted.
@@ -61,3 +63,10 @@ VERIFY BEFORE PUBLISHING:
 - The AdSense unit is placed after the 3rd paragraph by the template script.
   Do not paste an ad into the body yourself.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+See NOTES.md for why it must be on Blogger, not GitHub.

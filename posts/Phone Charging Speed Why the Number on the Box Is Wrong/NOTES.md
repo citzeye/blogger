@@ -146,3 +146,80 @@ The packaging numbers, from Uniqbe via BGR (Mar 2026):
 Topic: **why a phone's advertised charging speed is not what you will get, and
 what to do about it.** Regions, bricks and wattage are three aspects of that one
 question.
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+SLUG:      /phone-charging-speed      (NO year)
+KEYWORDS:  phone, charging, wattage, charger, adapter, oneplus, pixel
+           pixel
+
+NO CHARGER PRICES. The advice is "any 100W USB-C PD brick", which needs no
+price and does not rot. See NOTES.md.
+
+NO "FASTEST CHARGING PHONE" LEADERBOARD. That is a spec table that goes stale on
+every launch, and the site already has roundups.
+
+THE THESIS: a phone's advertised wattage is a ceiling, not a prediction. Three
+things stand between you and that number, all documented by the manufacturers.
+
+EVERY FACT BELOW IS FROM A MANUFACTURER PAGE OR A NAMED OUTLET, quoted.
+
+  1. WATTAGE VARIES BY REGION ON THE SAME MODEL. OnePlus's own pages disagree:
+       oneplus.com/us/13r      "Amp up your power with the 55W SUPERVOOC
+                               charging."  /  "1-50% in 23 mins"
+       oneplus.com/global/13r  "Amp up your power with the 80W SUPERVOOC
+                               charging."  /  "1-50% in 20 mins"
+       oneplus.com/no/13r/specs and oneplus.com/in/13r/specs
+                               "Charge: 80W SUPERVOOC"
+     And the footnote on the US page that explains it:
+       "Up to 80W with OnePlus SUPERVOOC 80W Dual Ports GaN Power Adapter or
+        OnePlus SUPERVOOC 100W Dual Ports Power Adapter"
+
+  2. THE BRICK IS THE LIMIT, NOT THE PHONE. CNET, Jan 2025:
+       "The phone can charge at 55W speeds using the included SuperVooc power
+        adapter, although a OnePlus representative said it can support 80W and
+        100W speeds, however you'll have to buy those SuperVooc charger models
+        separately. OVER THE MORE WIDELY AVAILABLE USB-PD STANDARD, IT CAN
+        CHARGE AT 18W SPEEDS."
+     GSMArena's 13R review agrees: "The handset supports up to 80W of fast
+     charging over the proprietary SuperVOOC standard, so you'd have to buy a
+     charger separately."
+
+  3. THERE MAY BE NO BRICK, AND A PHONE CAN ASK FOR MORE THAN IT USES.
+       store.google.com Pixel 10a spec page:
+         "Fast charging - up to 50% in about 30 minutes - using 45W USB-C PPS
+          charger or higher, SOLD SEPARATELY"
+         "What's in the box: Pixel 10a / 1 m USB-C to USB-C cable (USB 2.0) /
+          SIM tool"
+       So a 30W phone (Wikipedia/PhoneArena: 30W wired, 10W Qi) ships with no
+       brick and asks for a 45W one. Ars Technica Feb 2026 confirms the step up
+       from the 9a: 23W wired / 7.5W wireless -> 30W wired / 10W wireless.
+
+  ONEPLUS BOX CONTENTS, oneplus.com/in/13r/specs:
+    "In The Box - OnePlus 13R SUPERVOOC Power Adapter / Type-A to C Cable /
+     Quick Start Guide / Protective Case / SIM Tray Ejector"
+  oneplus.com/us/charging: "Your charger is always included in the box."
+
+  WHY THE BRICK LEFT (Samsung UK support page, Galaxy S21 onward):
+    "Samsung discovered that many Galaxy users are reusing earphones and
+     chargers that they already have at home even after purchasing a new phone."
+    "Note: In-box items may vary depending on the model or the country or
+     region you live in."   <- region matters, not just model
+  Samsung dropped it at the S21 (2021), extended to A33/A53/A73 (2022).
+  Google said the Pixel 5a would be the last Pixel with a brick (Verge, 2021).
+  Apple first, in 2020.
+  Packaging effect, Uniqbe via BGR Mar 2026: "50%" less packaging per box,
+  "70% more" phones per pallet.
+
+  WIRELESS, for contrast:
+    Nothing Phone (1), GSMArena: "33W wired, PD3.0, QC4 ... 15W wireless ...
+      5W reverse wireless"
+    OnePlus 12 / 10 Pro / 9 Pro: 50W wireless; OnePlus 8 Pro: 30W
+      (ChargerLAB, from OnePlus official info)
+    Pixel 10a: 10W Qi. Ars Technica: "There are no Qi2 magnets inside."
+
+NOTHING HERE WAS MEASURED BY US. Every charge time is a manufacturer claim and
+the post says so. This site does not lab-test batteries.

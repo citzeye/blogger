@@ -1,5 +1,7 @@
 # Can Budget Laptops Run AI Locally
 
+KEYWORDS:  laptop, ai, npu, budget
+
 Working notes for this post. Not published. The reasoning behind
 the claims, the sources, and the checks still to do before this
 post goes out. `index.html` is the only file that gets pasted.
@@ -79,3 +81,10 @@ VERIFY BEFORE PUBLISHING:
 - Re-confirm the Copilot+ threshold; it has been 40 TOPS since the label
   launched and is unlikely to move, but it is the load-bearing number here.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+See NOTES.md for why it must be on Blogger, not GitHub.

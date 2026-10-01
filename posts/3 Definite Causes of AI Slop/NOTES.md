@@ -3,7 +3,7 @@
 Working notes. Not published. `index.html` is the only file that gets pasted.
 
 SLUG:              /ai-slop-causes          (NO year — §13.2)
-KEYWORDS:          ai, writing, slop
+KEYWORDS:  ai, writing, slop
 
 ```
 THE THREE CAUSES, and why these three and not five:
@@ -89,3 +89,15 @@ IMAGES:
   1080x1800+, so a /s1600/ URL comes back downscaled to 878x1600 and the small
   type goes soft on a high-DPR phone. Use /s0/ to get full resolution.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+Upload to Blogger's own media library: Blogger only builds a post
+     thumbnail from an image on blogger.googleusercontent.com, so an
+     image from another host leaves the homepage card blank.
+     Then fix alt (Blogger writes alt=""), remove the <a href> wrapper
+     Blogger adds, and keep width/height. Use /s0/, not /s1600/.
+     Full steps in NOTES.md.

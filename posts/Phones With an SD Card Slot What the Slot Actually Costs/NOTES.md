@@ -151,3 +151,71 @@ produce.
 
 To be sourced at build time; both must show a real microSD card or a real SIM
 tray. Licences recorded in the post footer, as Commons terms require.
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+SLUG:      /phones-with-sd-card-slot      (NO year)
+KEYWORDS:  phone, sd card, microsd, expandable storage, dual sim, samsung, motorola
+           motorola, android
+
+NO PRICE LIST, AND DELIBERATELY NOT A "BEST PHONES WITH SD SLOT" ARTICLE.
+Android Central, How-To Geek and Gizmochina all published that in the last 12
+months and it ranks already. This post answers a different question. See
+NOTES.md for the SERP check.
+
+THE THESIS: an SD card slot is three features sold as one, and they conflict.
+  1. extra storage
+  2. storage apps can live on  — removed from Android in 2019
+  3. a second SIM line        — on many phones the card slot IS the SIM slot
+
+EVERY FACT BELOW IS FROM A MANUFACTURER PAGE OR SUPPORT DOC, quoted verbatim.
+
+  SAMSUNG (samsung.com product pages, "SIM Slot Type" field):
+    Galaxy A27 5G   External Storage Support "MicroSD (Up to 2TB)"
+                    SIM Slot Type  "SIM 1 + Hybrid (SIM or MicroSD)"
+    Galaxy A17 5G   SIM Slot Type  "SIM 1 + Hybrid (SIM or MicroSD)"
+    The SAME page also says Number of SIM: Dual-SIM — which is how one page
+    claims dual SIM and one SIM plus a card. GSMArena: "microSDXC (uses shared
+    SIM slot)".
+    Samsung dropped microSD from the Galaxy S series with the S21 (2021).
+
+  MOTOROLA (motorola.com US + en-us.support.motorola.com):
+    moto g (2026)       "Expand up to 1TB with a microSD card"
+                        SIM Card "Dual SIM (1 physical Nano SIM + eSIM + 1 microSD)"
+    moto g power (2026) "up to 1TB microSD card expandable UFS2.2"
+                        SIM Card "Dual SIM (1 physical Nano SIM + eSIM + 1 microSD)"
+    moto g play (2026)  "...expand up to 1TB via a DEDICATED microSD card slot"
+    GSMArena on Moto G (2026): "microSDXC (dedicated slot)"
+    moto g power (2026) footnote: "may not be possible to move content with DRM
+                        restrictions"
+    So Motorola keeps a dedicated slot, and can afford real dual-SIM as well.
+
+  THE APP LIMIT (Motorola support, repeated on every Moto G page):
+    "Your phone uses the card as PORTABLE STORAGE for media files: photos,
+     videos and music. ... YOU CAN'T STORE APPS ON THE SD CARD because it is
+     portable storage."
+    And on formatting: "If you don't see Format as internal, then your phone
+     only supports SD cards formatted as portable storage."
+    Motorola's own comparison table:
+                       Portable | Internal
+      Store media         yes    | yes
+      Store apps          NO     | yes
+      Content encrypted   no     | yes
+      Read in other devs  yes    | no
+
+  ANDROID 10 (2019) is when internal-storage formatting was removed. A Tom's
+  Guide thread records the user-visible consequence on a Moto G Play (2024):
+  "starting from Android 10, the ability to format an SD card as internal
+  storage has been removed."
+
+  NEVER HAD ONE: no Google Pixel has ever shipped a microSD slot. No iPhone
+  has either.
+  PREMIUM EXCEPTION: Sony still offers it on Xperia (Android Police, Jun 2026).
+
+HONEST CROSS-CHECK AGAINST OUR OWN SITE: the live "3 Phones Under $250" post
+recommends the Galaxy A17 5G. Samsung's own page lists that model as
+"SIM 1 + Hybrid (SIM or MicroSD)", so a dual-SIM reader would lose a line. That
+caveat is in the body text below rather than left for a reader to discover.

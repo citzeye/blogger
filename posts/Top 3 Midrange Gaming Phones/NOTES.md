@@ -140,3 +140,29 @@ IMAGES:
   It needs three product photos in images/refs/ and refuses to render without
   them. Pass --no-photos for a layout-only preview.
 ```
+
+
+---
+
+## EDITOR NOTES (dipindah dari index.html)
+
+SLUG:      /midrange-gaming-phones      (NO year)
+
+PRICES - all verified, USD, US market, checked September 2026:
+  OnePlus 13R             $549.99 live on oneplus.com/us, $599.99 list,
+                          Amazon promos seen at $499
+                          (the $549.99 is the manufacturer's own JSON-LD
+                           price field, valid until 2026-12-31)
+  Nothing Phone (4a) Pro  $499 at launch, ~$449 on sale
+                          (Billboard $499, PhoneArena $499,
+                           Smartprix US $449)
+  Google Pixel 10a        $499  (Gizmochina)
+
+  A FOURTH CANDIDATE WAS CUT: OnePlus Nord CE 6 5G. Times of India reported
+  its launch "in India", every price found was in rupees, and oneplus.com/us
+  does not list it. It fails the same US/UK availability test that removed the
+  Indonesian phones from the budget article.
+
+  SOURCED BUT NOT USED: GSMArena lists the OnePlus 13R at "$799.99". That is
+  an aggregator error - OnePlus's own US store says $599.99 list. Where a
+  manufacturer and an aggregator disagree, the manufacturer wins.

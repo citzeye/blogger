@@ -15,17 +15,43 @@ posts/
 
 ## Struktur index.html
 
-Dua baris info di paling atas, dalam komentar yang **dihapus sebelum paste**:
+Tiga baris info di paling atas, dalam komentar yang **dihapus sebelum paste**.
+Tiga baris ini persis sama dengan tiga kolom yang ada di editor Blogger:
 
 ```
 <!--
-TITLE:       3 AI Apps That Make Your Work Easier
-DESCRIPTION: Satu kalimat, 70-160 karakter, untuk kolom Description.
+TITLE:  3 AI Apps That Make Your Work Easier
+TAGS:   AI
+DESC:   Satu kalimat, 70-160 karakter, untuk kolom Search Description.
+Paste the body below into Blogger's HTML view, then copy TITLE into the Title
+field, TAGS into Labels and DESC into Search Description. Delete this comment.
 -->
 ```
 
+| Baris | Ke kolom Blogger mana |
+|---|---|
+| `TITLE:` | **Title** |
+| `TAGS:` | **Labels** |
+| `DESC:` | **Search Description** |
+
 Lalu langsung isi artikel. Tidak ada `<h1>` di body. Tidak ada catatan
 panjang — semua itu pindah ke `NOTES.md`.
+
+**Tidak ada `SLUG:` lagi.** Blogger membuat permalink sendiri dari kolom Title,
+jadi tidak ada yang perlu dideklarasikan. `§12.2` (tanpa tahun) tetap terjaga
+karena `TITLE:`-nya sendiri sudah diperiksa validator.
+
+**`KEYWORDS:` pindah ke `NOTES.md`.** Keyword bukan kolom Blogger dan
+`<meta name='keywords'>` diabaikan mesin pencari sejak 2009. Yang benar-benar
+berpengaruh adalah kata kunci itu **muncul di teks artikel**, dan
+`validate-post.py` sekarang memeriksanya:
+
+```
+Every keyword appears in the article text
+```
+
+Jadi kalau sebuah kata kunci tidak ada di artikel, yang diperbaiki artikelnya —
+bukan daftarnya.
 
 ## Kenapa gambar harus di-upload ke Blogger, bukan GitHub
 
