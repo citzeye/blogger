@@ -97,8 +97,14 @@ Jadi upload manual ke media Blogger. Catatan lengkap ada di `NOTES.md` tiap post
 6. **Validasi:**
    ```bash
    python3 posts/validate-post.py "posts/<Judul Post>/index.html"
+   python3 posts/slop-check.py  "posts/<Judul Post>/index.html"
    ```
-   Target: `ALL RULES PASS`.
+   Target: `ALL RULES PASS` dan `CLEAN no flagged patterns`.
+
+   Dua cek ini beda tugasnya. `validate-post.py` memeriksa struktur: urutan
+   heading, target link, dimensi gambar, heading level. `slop-check.py` membaca
+   kalimatnya: filler, jargon, dan pola tulisan yang sering muncul di teks
+   mesin. Keduanya harus bersih sebelum commit.
 
 ## Upload ke Blogger
 
@@ -116,6 +122,7 @@ Jadi upload manual ke media Blogger. Catatan lengkap ada di `NOTES.md` tiap post
 | File | Guna |
 |---|---|
 | `validate-post.py` | Cek SEO, evergreen, heading, gambar, link internal |
+| `slop-check.py` | Cek prosa: filler, jargon, pola tulisan AI. Pasang `anti-slop` |
 | `make-real-images.py` | Komposit device/HP (1080px potret) |
 | `make-laptop-images.py` | Komposit laptop (1080px potret) |
 | `make-images.py` | Generator lama era grafik abstrak — **deprecated** |

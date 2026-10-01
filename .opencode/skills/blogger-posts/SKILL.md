@@ -1,14 +1,14 @@
 ---
 name: blogger-posts
-description: "Rules for writing, editing, publishing and illustrating posts for the lateway.blogspot.com tech blog - US/UK audience, USD pricing, English slugs, Blogger Title-field semantics, real-product-photo graphics. Use when touching citzeyeblogspot.xml, AGENT.md, or anything under posts/."
+description: "Rules for writing, editing, publishing and illustrating posts for the citzeye.blogspot.com tech blog - US/UK audience, USD pricing, English slugs, Blogger Title-field semantics, real-product-photo graphics. Use when touching citzeyeblogspot.xml, AGENT.md, or anything under posts/."
 license: "project"
 compatibility: "opencode"
 metadata:
   project: "citzeyeblogspot"
-  blog: "lateway.blogspot.com"
+  blog: "citzeye.blogspot.com"
 ---
 
-# Blogger posts — lateway.blogspot.com
+# Blogger posts — citzeye.blogspot.com
 
 **First action, always: read `AGENT.md` at the repo root.** It is the 288-line
 playbook (SEO, Core Web Vitals, responsive, evergreen, anti-patterns).
@@ -203,6 +203,10 @@ Three defects in one line:
 - Verify nesting with a real parser (`html.parser` / lxml), never by reading
   tags and counting by eye.
 - Every article: `python3 posts/validate-post.py posts/<file>.html`.
+- Every article, prose pass: `python3 posts/slop-check.py posts/<file>.html`.
+  Different job from the validator above: that one enforces structure (heading
+  order, link targets, image dimensions), this one reads the sentences for
+  filler and AI tells. See the `anti-slop` skill. Both must be clean.
 - Every template change: re-check XML well-formedness, CSS brace balance per
   `<style>` block, zero missing `b:include`, zero invalid `b:widget-setting`,
   zero `<img>` without `alt`, and exactly one H1 per page (from the Title
