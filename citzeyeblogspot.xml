@@ -664,6 +664,12 @@
     display:block;border-radius:var(--r);
   }
   .blog-posts .cardbox:hover .post-title a{color:var(--accent-soft)}
+  .blog-posts h2.post-title,
+  .blog-posts h2.post-title a,
+  .blog-posts h2.post-title a:visited{color:var(--fg)}
+  .blog-posts h2.post-title a:hover,
+  .blog-posts .cardbox:hover h2.post-title,
+  .blog-posts .cardbox:hover h2.post-title a{color:var(--accent)}
   .blog-posts .post-body .post-snippet{
     font-size:.8rem;line-height:1.7;margin-top:auto;padding-top:var(--s2);
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
