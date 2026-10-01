@@ -62,43 +62,50 @@ field with the TITLE line above and the Description field with DESCRIPTION.
 
 
 def main():
-    for d in sorted(os.listdir(HERE)):
-        p = os.path.join(HERE, d, "index.html")
-        if not os.path.isfile(p):
+    # Post folders live under a publication-state group, so walk those rather
+    # than posts/ directly. Keeping the folder name separate from the group name
+    # matters: NOTES.md is titled after the post, not "PUBLISHED/<post>".
+    for group in ("PUBLISHED", "DRAFT"):
+        gdir = os.path.join(HERE, group)
+        if not os.path.isdir(gdir):
             continue
-        raw = io.open(p, encoding="utf-8").read()
-        notes, body = split_notes(raw)
+        for d in sorted(os.listdir(gdir)):
+            p = os.path.join(gdir, d, "index.html")
+            if not os.path.isfile(p):
+                continue
+            raw = io.open(p, encoding="utf-8").read()
+            notes, body = split_notes(raw)
 
-        title = field(notes, "TITLE") or f"UNSET - fill this in"
-        desc = field(notes, "META DESCRIPTION", "DESCRIPTION")
+            title = field(notes, "TITLE") or f"UNSET - fill this in"
+            desc = field(notes, "META DESCRIPTION", "DESCRIPTION")
 
-        # drop any leftover comment fragments from the body
-        body = re.sub(r"<!--\s*END (?:EDITOR )?NOTES\s*-->", "", body)
-        body = body.strip("\n")
+            # drop any leftover comment fragments from the body
+            body = re.sub(r"<!--\s*END (?:EDITOR )?NOTES\s*-->", "", body)
+            body = body.strip("\n")
 
-        out = HEADER.format(title=title, desc=desc or "UNSET - fill this in")
-        out += body + "\n"
-        io.open(p, "w", encoding="utf-8").write(out)
+            out = HEADER.format(title=title, desc=desc or "UNSET - fill this in")
+            out += body + "\n"
+            io.open(p, "w", encoding="utf-8").write(out)
 
-        # archive the long notes beside the post instead of losing them
-        if notes.strip():
-            np = os.path.join(HERE, d, "NOTES.md")
-            body_note = (
-                f"# {d}\n\n"
-                f"Working notes for this post. Not published. The reasoning behind\n"
-                f"the claims, the sources, and the checks still to do before this\n"
-                f"post goes out. `index.html` is the only file that gets pasted.\n\n"
-                f"```\n{notes}\n```\n")
-            io.open(np, "w", encoding="utf-8").write(body_note)
+            # archive the long notes beside the post instead of losing them
+            if notes.strip():
+                np = os.path.join(gdir, d, "NOTES.md")
+                body_note = (
+                    f"# {d}\n\n"
+                    f"Working notes for this post. Not published. The reasoning behind\n"
+                    f"the claims, the sources, and the checks still to do before this\n"
+                    f"post goes out. `index.html` is the only file that gets pasted.\n\n"
+                    f"```\n{notes}\n```\n")
+                io.open(np, "w", encoding="utf-8").write(body_note)
 
-        # the duplicate paste block is gone for good
-        fx = os.path.join(HERE, d, "IMAGE-FIX.html")
-        if os.path.exists(fx):
-            os.remove(fx)
+            # the duplicate paste block is gone for good
+            fx = os.path.join(gdir, d, "IMAGE-FIX.html")
+            if os.path.exists(fx):
+                os.remove(fx)
 
-        print(f"  {d}")
-        print(f"     title: {title[:64]}")
-        print(f"     desc : {(desc[:60] + '...') if len(desc) > 60 else desc}")
+            print(f"  {group}/{d}")
+            print(f"     title: {title[:64]}")
+            print(f"     desc : {(desc[:60] + '...') if len(desc) > 60 else desc}")
 
 
 if __name__ == "__main__":

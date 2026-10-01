@@ -29,25 +29,45 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))   # posts/ - shared tooling root
 POSTS = HERE
 
-# One folder per post, named after the post title:
-#   posts/<Post Title>/index.html
-#   posts/<Post Title>/images/<composites>
-#   posts/<Post Title>/images/refs/<product photos>
+# Post folders live under a publication-state group, not directly in posts/:
+#   posts/PUBLISHED/<Post Title>/index.html    already on Blogger
+#   posts/DRAFT/<Post Title>/index.html        written, not published
+# Callers still pass the bare post title. That keeps every invocation readable
+# as `make-phone-images.py "Phone Charging Speed"` instead of making the
+# publication state part of every command, and it means a post that gets
+# published does not break any command line that references it.
+GROUPS = ("PUBLISHED", "DRAFT")
+
 # The two globals below are repointed per post by set_post_dir().
 IMG = os.path.join(POSTS, "images")
 REFS = os.path.join(IMG, "refs")
 
 
+def resolve_post_dir(name):
+    """Return the post directory for `name`, or None.
+
+    `name` may be a bare post title, resolved against GROUPS in order, or an
+    explicit "GROUP/Title" path relative to posts/.
+    """
+    if os.sep in name:
+        d = os.path.join(POSTS, name)
+        return d if os.path.isdir(d) else None
+    for group in GROUPS:
+        cand = os.path.join(POSTS, group, name)
+        if os.path.isdir(cand):
+            return cand
+    return None
+
+
 def set_post_dir(name):
-    """Point IMG/REFS at posts/<name>. Returns the post directory."""
+    """Point IMG/REFS at the post folder. Returns the post directory."""
     global IMG, REFS
-    d = os.path.join(POSTS, name)
-    if not os.path.isdir(d):
-        have = sorted(p for p in os.listdir(POSTS)
-                      if os.path.isdir(os.path.join(POSTS, p)))
+    d = resolve_post_dir(name)
+    if d is None:
+        have = list_posts()
+        listing = "\n  ".join(have) if have else "  (none found)"
         raise SystemExit(
-            f"No such post folder: {d}\nPost folders available:\n  "
-            + "\n  ".join(have))
+            f"No such post folder: {name}\nPost folders available:\n{listing}")
     IMG = os.path.join(d, "images")
     REFS = os.path.join(IMG, "refs")
     os.makedirs(IMG, exist_ok=True)
@@ -55,12 +75,19 @@ def set_post_dir(name):
 
 
 def list_posts():
-    """Post folders only: a subdirectory that actually contains an index.html."""
-    return sorted(
-        p for p in os.listdir(POSTS)
-        if os.path.isdir(os.path.join(POSTS, p))
-        and not p.startswith((".", "_"))
-        and os.path.isfile(os.path.join(POSTS, p, "index.html")))
+    """Every post folder across all groups, as "GROUP/Title"."""
+    out = []
+    for group in GROUPS:
+        gdir = os.path.join(POSTS, group)
+        if not os.path.isdir(gdir):
+            continue
+        out.extend(
+            f"{group}/{p}"
+            for p in sorted(os.listdir(gdir))
+            if os.path.isdir(os.path.join(gdir, p))
+            and not p.startswith((".", "_"))
+            and os.path.isfile(os.path.join(gdir, p, "index.html")))
+    return out
 
 
 W = 1080                      # portrait-ish: tall on a phone for its width

@@ -33,7 +33,7 @@ TUNED AGAINST THE PUBLISHED CORPUS
 
 USAGE
     python3 slop-check.py <post.html> [...]      exit 0 clean, 1 if any file flagged
-    python3 slop-check.py posts/*/index.html     check everything
+    python3 slop-check.py posts/*/*/index.html    check every post, both groups
 """
 import os
 import re
@@ -245,5 +245,9 @@ def main(paths):
 if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     if not args:
-        args = ["3 Phones Under $250/index.html"]
+        # Resolve against this file, not the working directory, so the bare
+        # invocation works from anywhere. It did not before: the default was a
+        # relative path and silently skipped when run from the repo root.
+        args = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "PUBLISHED", "3 Phones Under $250", "index.html")]
     sys.exit(main(args))

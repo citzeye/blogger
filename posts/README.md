@@ -1,16 +1,34 @@
 # posts/ — workflow
 
-Satu folder per post. **Nama folder = judul post persis.**
-Tool `.py` di sini dipakai lintas post, jadi tetap di root.
+Satu folder per post, dikelompokkan menurut status publikasinya.
+**Nama folder = judul post persis.** Tool `.py` dipakai lintas post, jadi tetap
+di root.
 
 ```
 posts/
-├── <Judul Post>/           ← nama folder = judul post PERSIS
-│   ├── index.html          ← SATU-SATUNYA file yang di-paste ke Blogger
-│   ├── NOTES.md            ← catatan internal (tidak dipublish)
-│   └── images/             ← 1 file gambar untuk post ini
+├── PUBLISHED/              ← sudah tayang di Blogger
+│   └── <Judul Post>/        ← nama folder = judul post PERSIS
+│       ├── index.html       ← SATU-SATUNYA file yang di-paste ke Blogger
+│       ├── NOTES.md         ← catatan internal (tidak dipublish)
+│       └── images/          ← 1 file gambar untuk post ini
+├── DRAFT/                  ← sudah ditulis, belum dipublish
+│   └── <Judul Post>/        ← struktur file sama persis
 ├── _legacy/                ← file jaman awal, jangan dipakai lagi
 └── *.py                    ← tool (validator + generator gambar)
+```
+
+Pindah post dari `DRAFT/` ke `PUBLISHED/` setelah tayang di Blogger. Tidak ada
+langkah lain yang perlu diubah: semua tool mencari post di kedua group, dan
+memanggilnya tetap pakai **judul polos**, tanpa menyebut group-nya.
+
+```sh
+python3 posts/make-phone-images.py "Phone Charging Speed Why the Number on the Box Is Wrong"
+```
+
+Kalau mau menyebut group secara eksplisit,oboleh dengan `GROUP/Judul`:
+
+```sh
+python3 posts/make-phone-images.py "DRAFT/Phone Peak Brightness The Number That Is Not Outdoor Brightness"
 ```
 
 ## Struktur index.html
@@ -64,9 +82,9 @@ Jadi upload manual ke media Blogger. Catatan lengkap ada di `NOTES.md` tiap post
 
 ## Bikin post baru
 
-1. **Buat folder** dengan nama = title persis:
+1. **Buat folder** di `DRAFT/` dengan nama = title persis:
    ```bash
-   mkdir -p "posts/<Judul Post>/images/refs"
+   mkdir -p "posts/DRAFT/<Judul Post>/images/refs"
    ```
 2. **`index.html`** — simpan body artikel di sana. Yang wajib:
    - **Tanpa `<h1>`.** Judul Goes ke kolom *Title* Blogger; Blogger yang
@@ -96,8 +114,8 @@ Jadi upload manual ke media Blogger. Catatan lengkap ada di `NOTES.md` tiap post
    produk belum ada. Tidak pernah membuat placeholder.
 6. **Validasi:**
    ```bash
-   python3 posts/validate-post.py "posts/<Judul Post>/index.html"
-   python3 posts/slop-check.py  "posts/<Judul Post>/index.html"
+   python3 posts/validate-post.py "posts/DRAFT/<Judul Post>/index.html"
+   python3 posts/slop-check.py  "posts/DRAFT/<Judul Post>/index.html"
    ```
    Target: `ALL RULES PASS` dan `CLEAN no flagged patterns`.
 

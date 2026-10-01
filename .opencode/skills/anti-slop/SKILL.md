@@ -13,7 +13,7 @@ reader. This skill exists to stop that happening quietly.
 ## Run the checker first
 
 ```sh
-python3 posts/slop-check.py "posts/<Post Folder>/index.html"
+python3 posts/slop-check.py "posts/DRAFT/<Judul Post>/index.html"
 ```
 
 It prints the offending phrase with surrounding context, grouped by pattern

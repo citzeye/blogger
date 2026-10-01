@@ -69,11 +69,25 @@ PY
   Contoh: `Phone Charging Speed: Why the Number on the Box Is Wrong` → folder `Phone Charging Speed Why the Number on the Box Is Wrong`.
 
   Larangan keras, karena merusak path di shell:
-  - **`$`** — `posts/3 Phones Under $250` tanpa quote dibaca sebagai variabel shell dan path-nya gagal. Kalau muncul di judul, pakai kata (`250 Dollars`), jangan symbol.
+  - **`$`** — `posts/PUBLISHED/3 Phones Under $250` tanpa quote dibaca sebagai variabel shell dan path-nya gagal. Kalau muncul di judul, pakai kata (`250 Dollars`), jangan symbol.
   - **`/`** — selalu jadi subdirektori, bukan karakter dalam nama.
   - `:` dan `,` dan `.` — bukan deadly, tapi dihindari agar nama folder dan `TITLE:` glance-nya identik.
 
   Kalau nama folder nanti tidak sama dengan `TITLE:`, itu **tidak fatal** selama tidak ada karakter terlarang di dalamnya — yang penting foldernya bisa dipetik dan dipakai.
+
+- **Folder post diletakkan di bawah group, bukan langsung di `posts/`.**
+
+  ```
+  posts/PUBLISHED/<Judul Post>/    sudah tayang di Blogger
+  posts/DRAFT/<Judul Post>/        sudah ditulis, belum dipublish
+  ```
+
+  Setelah post tayang, pindahkan foldernya dari `DRAFT/` ke `PUBLISHED/`. Itu
+  satu-satunya langkah yang perlu — semua tool (`make-*.py`, `validate-post.py`,
+  `slop-check.py`) mencari post di kedua group, dan dipanggil dengan **judul polos**
+  tanpa menyebut group, jadi tidak ada perintah yang harus diubahsaat dipindah.
+
+  Tool boleh menerima `GROUP/Judul` kalau group memang perlu disebut eksplisit.
 - **Meta description**: ≤ 160 karakter, keyword + CTA, unik per artikel.
 - **Title tag**: ~60 karakter, therapeutic, ada keyword.
 - Sub-heading pakai H2 ke bawah, sertakan keyword di sebagian heading.
