@@ -1,0 +1,219 @@
+<!--
+TITLE:  Phone Peak Brightness: The Number That Is Not Outdoor Brightness
+TAGS:   Phone
+DESC:   A 3,300 nit phone screen is not 3,300 nits to look at. What the peak figure measures, and which number to compare instead.
+Paste the body below into Blogger's HTML view, then copy TITLE into the Title
+field, TAGS into Labels and DESC into Search Description. Delete this comment.
+-->
+
+<p>Every flagship phone has a brightness number, and it has gone up every year.
+The Pixel 10 Pro is quoted at 3,300 nits. The Galaxy S25 series is quoted at
+2,600. Neither figure describes what the screen will look like when you are
+holding it in the sun, and the reason is not marketing spin. It is that both
+numbers are measured on a small patch of screen, and the patch is not the same
+size as the screen you are reading.</p>
+
+<p>This is the same shape of problem as the
+<a href="/2026/10/phone-charging-speed-why-number-on-box.html">wattage on the
+charger</a>: the headline figure is a ceiling measured under conditions the
+product will rarely be in. Here the gap is bigger, because brightness depends on
+how much of the display is trying to be bright at once.</p>
+
+<!-- IMAGE: upload the file from images/ here. One image per post.
+     See NOTES.md for why it must be on Blogger, not GitHub. -->
+
+<h2>What the number on the box measures</h2>
+
+<p>Display engineers describe how bright a picture is with something called the
+Average Picture Level, usually shortened to APL. It is simply the share of the
+image that is bright, as a percentage of a fully white screen. A fully white
+screen is 100% APL. A white letter on a black background might be 2%. The
+standard that defines it, IEC 62341-6-1, treats full-screen luminance and 4%
+window luminance as two separate measurements, because they genuinely are two
+different numbers.</p>
+
+<p>Here is why that matters. An OLED pixel is its own light source, which sounds
+like an advantage: it makes its own light, so why not just make it bright?
+Because the panel has a limited power and heat budget for the whole module. When
+only a small patch is white, the rest of the screen is dark, the back of the
+phone stays cool, and the driver circuitry has power to spare. So it can push
+those few pixels far harder. When the whole screen is white, every pixel is
+asking for power at once, the phone heats up, and the manufacturer pulls the
+number back to something it can sustain.</p>
+
+<p>EIZO, which builds professional reference monitors, describes the mechanism
+plainly: as APL rises, the panel is treated as being under more stress and the
+brightness is reduced accordingly. The panel vendor
+<a href="https://news.lgdisplay.com/en/2026/02/the-real-story-behind-lg-displays-new-tandem-woled-2" target="_blank" rel="noopener">LG
+Display</a> puts it more directly still, when announcing a new OLED generation,
+saying that peak brightness matters but perceived brightness in real viewing
+environments is equally critical, and that improving luminance at APL 25% is the
+key thing they worked on.</p>
+
+<p>So a "peak brightness" figure is describing a small, bright, momentary
+highlight. That is a real capability, and it is what makes a specular
+highlight in an HDR film pop against black. It is not a statement about a white
+webpage, a map, or a text message.</p>
+
+<h2>Google prints two numbers for the same phone</h2>
+
+<p>The cleanest evidence that this is not an accusation thrown at manufacturers
+is that Google publishes both figures itself, on the same spec page, next to
+each other. The
+<a href="https://store.google.com/us/product/pixel_10_pro_specs" target="_blank" rel="noopener">Pixel 10 Pro
+spec sheet</a> states: up to 2,200 nits in HDR mode, and up to 3,300 nits peak
+brightness.</p>
+
+<p>Those are not two ways of rounding the same measurement.
+<a href="https://www.gsmarena.com/google_pixel_10_pro-review-2877p3.php" target="_blank" rel="noopener">GSMArena</a>,
+which has tested the handset, reports what Google means by each. The 2,200 nits
+figure is what you get in high-brightness mode with the whole display lit up.
+The 3,300 nits figure is for a 5% patch of white. Google is telling you, on its
+own page, that the headline number applies to one twentieth of the screen.</p>
+
+<p>Samsung is more oblique but says something equivalent. Its Galaxy S25 pages
+quote 2,600 nits, and the
+<a href="https://www.samsung.com/us/smartphones/galaxy-s25-ultra/compare" target="_blank" rel="noopener">footnotes
+on the comparison page</a> add that High Brightness Mode and Vision Booster are
+activated in areas of 5,000 lux or higher. That is the manufacturer naming the
+condition: the boost is a reaction to bright ambient light, not a state the
+screen sits in.</p>
+
+<h2>The same phone, measured four ways apart</h2>
+
+<p>Manufacturers do not publish their measurement method, so labs do it
+themselves, and they do not agree. The Galaxy S25 is the clearest example,
+because four well-known measurements of one handset land in very different
+places:</p>
+
+<table>
+<tr><th>Source</th><th>How it was measured</th><th>Nits</th></tr>
+<tr><td>Samsung's spec sheet</td><td>claimed peak</td><td>2,600</td></tr>
+<tr><td><a href="https://www.dxomark.com/samsung-galaxy-s25-display-test" target="_blank" rel="noopener">DXOMARK</a></td><td>peak luminance</td><td>2,600</td></tr>
+<tr><td>PhoneArena</td><td>20% APL window</td><td>2,394</td></tr>
+<tr><td><a href="https://www.gsmarena.com/samsung_galaxy_s25-review-2794p3.php" target="_blank" rel="noopener">GSMArena</a></td><td>full screen, brightness boost on</td><td>747</td></tr>
+<tr><td>GSMArena</td><td>full screen, manual slider</td><td>438</td></tr>
+</table>
+
+<p>Every row is a true measurement of a real phone. The gap between 2,600 and
+438 is not six-fold worse screen quality. It is the difference between lighting
+up a fifth of the display and lighting up all of it, with the brightness slider
+left where a person would leave it.</p>
+
+<p>The Pixel behaves the same way. GSMArena measured the 10 Pro on a 75% lit-up
+area and got 1,399 nits with the brightness slider set manually, and 2,351 nits
+with adaptive brightness switched on. Both are below the 3,300 in the spec sheet,
+and both are far closer to what a full white screen does.</p>
+
+<p>This also explains why two review sites can disagree about which of two
+phones has the better screen without either of them being wrong. If one lab
+measures a 20% window and the other measures the full screen, they are not
+measuring the same thing, and the ranking can flip.</p>
+
+<h2>Why a panel cannot be bright everywhere</h2>
+
+<p>Two limits get in the way, and they are physical rather than commercial.</p>
+
+<p>The first is power. A brighter pixel draws more current. Lighting an entire
+OLED screen at 2,600 nits would demand a power budget that would empty a large
+battery in minutes and make the phone too hot to hold. Panel makers limit the
+whole-screen figure to what the phone can sustain, and the peak figure is what
+the panel can deliver for a brief highlight before it has to back off.</p>
+
+<p>The second is heat. Bandicoot Lab, which measures both figures separately for
+each phone it tests, reports the same relationship across models: the Galaxy S26
+reached 640 nits manually and 2,791 nits at HDR peak, and the Pixel 10 reached
+about 1,496 nits manually against about 3,089 at HDR peak. In both cases the
+headline figure is roughly double to five times the number the phone puts out
+across its whole screen.</p>
+
+<p>Neither of those limits is a trick. A phone that held 3,300 nits across the
+entire display would be too hot and would flatten the battery. The spec sheet is
+not lying. It is just answering a narrower question than the one you were
+asking.</p>
+
+<h2>What direct sunlight actually does</h2>
+
+<p>Outdoor use is the case people care about, and it is the case where the
+headline number helps least. In direct sun, the display is not fighting other
+pixels for power; it is fighting reflected light off the glass, which arrives at
+the screen from outside and washes the image out before the panel contributes
+anything at all.</p>
+
+<p>That is visible in the photo below, taken outdoors on a bright day: the
+screen's own content is being overrun by reflection off the cover glass, and
+the interface all but disappears. Brightness helps, but a modest increase in
+emitted light is competing against an equally large increase in reflected
+light.</p>
+
+<p>Two things help more than raw peak brightness does. The first is an
+anti-reflective layer, which reduces the reflection rather than trying to
+out-shine it. The second is how long the boost lasts: sustained high brightness
+in sun costs battery and generates heat, so phones cap it and drop back as the
+panel warms. A number that is briefly available when you first turn the screen
+on is worth less outdoors than a lower number that holds for as long as you need
+to read the thing.</p>
+
+<h2>How to read a brightness spec sheet</h2>
+
+<p>Four checks, in the order they matter.</p>
+
+<h3>Ignore the word peak</h3>
+
+<p>If the figure is labelled peak, it describes a highlight. Some figures are
+only ever quoted as peak, which tells you the maker has not committed to a
+whole-screen number in public at all.</p>
+
+<h3>Look for the full-screen or high-brightness figure</h3>
+
+<p>Google calls it HDR mode and publishes it as 2,200 nits next to the 3,300
+peak. That second number is the one to compare between phones, because it is
+closer to the whole-screen behaviour you will actually see.</p>
+
+<h3>Check for the words local boost</h3>
+
+<p>If the sheet says the figure is achieved under local HDR boost conditions,
+that is the manufacturer telling you the bright patch is small and temporary.
+A local boost on a small percentage of the screen tells you very little about
+what a full page of white text looks like.</p>
+
+<h3>Ask whether the number is HDR-only</h3>
+
+<p>Several of these figures only apply to HDR content. Everyday use is mostly
+not HDR. A phone whose headline brightness applies only to video and games is
+not brighter for the map you are using to find a bus stop.</p>
+
+<h2>The figure worth comparing</h2>
+
+<p>None of this means brightness specs are useless, or that you should ignore
+the number. It means the number answers a narrower question than "will I be
+able to read this outside", and the fix is to ask it the narrower question
+properly.</p>
+
+<p>Compare the full-screen figure where the maker publishes one. Ignore a peak
+number when you are comparing two phones that do not publish a full-screen
+figure. Treat any gap larger than about half between claimed peak and a measured
+full-screen number as the honest cost of that phone, rather than as a defect.
+And if you genuinely need to read a screen in direct sun for long stretches,
+weigh the anti-reflective coating and the boost duration as heavily as the
+brightness figure itself, because those are the two things that decide whether
+the screen stays readable once you are past the first few seconds.</p>
+
+<p>It is worth adding that gaming phones get judged on this harder than any
+other category, because they are used outdoors more than most phones. Our
+<a href="/2026/09/top-3-midrange-gaming-phones.html">midrange gaming phone
+guide</a> looks at the chipset, but screen legibility is the other half of
+whether a game is playable outside.</p>
+
+<p style="font-size:.82rem;color:#6c6785;border-top:1px solid rgba(255,255,255,.07);padding-top:1rem;margin-top:2rem">
+<strong>Image credits.</strong> Person holding a smartphone outdoors on a sunny
+day by Shixart1985, CC BY 2.0. EIZO Foris FG2421 monitor displaying a
+calibration test pattern by Lucasbosch, CC BY-SA 4.0. Both via Wikimedia
+Commons.
+<strong>Note on sourcing:</strong> this site does not lab-test displays. Every
+brightness figure above is either a manufacturer's own published claim or a
+measurement by a named lab, with the method that lab stated quoted alongside the
+number. Figures change with each model and each region, so check the spec sheet
+for the exact handset you are buying. Brightness also depends on ambient light,
+temperature, battery state and how long the screen has been on.
+</p>

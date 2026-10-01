@@ -143,6 +143,26 @@ CONFIGS = {
              "#ffca85", "WHAT YOU BUY", "any 100W USB-C PD brick will do"),
         ],
     },
+    # Two states of the same panel, not two products. The left card is what the
+    # spec number describes - a small bright patch, and the test card it is
+    # measured on has the window-size markers printed in its corner. The right
+    # card is the whole screen in the conditions the number is never quoted for.
+    # No prices: this is a reference article, and "price" is None on both cards.
+    "Phone Peak Brightness The Number That Is Not Outdoor Brightness": {
+        "out": "01-phone-peak-brightness",
+        "layout": "compare",
+        "eyebrow": "~/PHONE DISPLAYS",
+        "title": "PEAK IS A SMALL PATCH",
+        "sub": "The headline number is measured on a sliver of screen",
+        "accent": "#a277ff",
+        "footer": "Vendor spec pages and named lab measurements, checked October 2026",
+        "phones": [
+            ("The patch", None, ("display-test-pattern", "test-pattern", "testcard"),
+             "#a277ff", "WHAT IS QUOTED", "3,300 nits on a 5% window, briefly"),
+            ("The screen", None, ("phone-in-sun", "phone", "sun"),
+             "#ffca85", "WHAT YOU SEE", "full screen, outdoors, washed out"),
+        ],
+    },
     "Top 3 Midrange Gaming Phones": {
         "out": "01-midrange-gaming-phones",
         "eyebrow": "~/MIDRANGE GAMING",
