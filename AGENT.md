@@ -60,6 +60,20 @@ PY
 - **H1 = judul artikel saja.** H2–H6 untuk sub-heading. H1 dobel = sinyal degradasi, dan H1 = heading utama untuk snippet.
 - Judul artikel harus `h1`/entry-title yang berisi keyword utama.
 - **URL ringkas**: hanya keyword inti, tanpa stop-word ("and", "the", "yang", "dan").
+- **Nama folder = baris `TITLE:`, dengan karakter terlarang dihapus.**
+
+  Alasan: folder murni alat bantu kerja. Nama folder tidak pernah tayang ke pembaca, jadi tidak perlueln отдельный optimizing — tapi harus **cukup jelas** supaya saat membuka `posts/` Anda tahu itu post yang mana, tanpa perlu membuka file-nya.
+
+  Aturanmapping: ambil teks `TITLE:`, buang `: , . $ ? ! / \ | & " ' < > ( ) [ ] { } # % ^ ~ \` + = @`, rapatkan spasi ganda, trim.
+
+  Contoh: `Phone Charging Speed: Why the Number on the Box Is Wrong` → folder `Phone Charging Speed Why the Number on the Box Is Wrong`.
+
+  Larangan keras, karena merusak path di shell:
+  - **`$`** — `posts/3 Phones Under $250` tanpa quote dibaca sebagai variabel shell dan path-nya gagal. Kalau muncul di judul, pakai kata (`250 Dollars`), jangan symbol.
+  - **`/`** — selalu jadi subdirektori, bukan karakter dalam nama.
+  - `:` dan `,` dan `.` — bukan deadly, tapi dihindari agar nama folder dan `TITLE:` glance-nya identik.
+
+  Kalau nama folder nanti tidak sama dengan `TITLE:`, itu **tidak fatal** selama tidak ada karakter terlarang di dalamnya — yang penting foldernya bisa dipetik dan dipakai.
 - **Meta description**: ≤ 160 karakter, keyword + CTA, unik per artikel.
 - **Title tag**: ~60 karakter, therapeutic, ada keyword.
 - Sub-heading pakai H2 ke bawah, sertakan keyword di sebagian heading.

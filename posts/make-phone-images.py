@@ -90,7 +90,7 @@ CONFIGS = {
     # licence - so the captions describe what is actually shown rather than
     # asserting the opposite of it. "price" is None for these cards and the
     # footer comes from the config, since "prices move weekly" would be a lie.
-    "Upgradeable RAM Laptops": {
+    "Upgradeable RAM Laptops Reading the Spec Sheet": {
         "out": "01-upgradeable-ram-laptops",
         "layout": "compare",
         "eyebrow": "~/LAPTOP HARDWARE",
@@ -109,7 +109,7 @@ CONFIGS = {
     # the card, and the SIM tray it competes with for the same slot. The point
     # of the layout is that the nano-SIM is not a second card - it is the other
     # half of one shared slot.
-    "Phones With SD Card Slot": {
+    "Phones With an SD Card Slot What the Slot Actually Costs": {
         "out": "01-phones-with-sd-card-slot",
         "layout": "compare",
         "eyebrow": "~/PHONE STORAGE",
@@ -128,7 +128,7 @@ CONFIGS = {
     # have to carry. Left is the old silicon brick next to a GaN one of the same
     # 30W, right is the 45W USB-C adapter the Pixel 10a's spec page tells you to
     # buy separately. Both are real products, photographed.
-    "Phone Charging Speed": {
+    "Phone Charging Speed Why the Number on the Box Is Wrong": {
         "out": "01-phone-charging-speed",
         "layout": "compare",
         "eyebrow": "~/PHONE CHARGING",
